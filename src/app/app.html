@@ -1,1 +1,39 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-header>
+    <!--<ion-toolbar>
+      <ion-title><span style="color:white;">Select</span></ion-title>
+    </ion-toolbar>-->
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="selectList('All Lists')">
+        <ion-icon name="home" style="color:#488aff; margin-right:5px"></ion-icon>
+        All Lists
+      </button>
+      <button ion-item (click)="selectList('Personal')">
+        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+        Personal
+      </button>
+      <button ion-item (click)="selectList('Office')">
+        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+        Office
+      </button>
+      <button ion-item (click)="selectList('Wishlist')">
+        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+        Wishlist
+      </button>
+      <button ion-item (click)="selectList('Shopping')">
+        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+        Shopping
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <ion-icon name="close-circle" style="color:#488aff; margin-right:5px"></ion-icon>
+        Close Menu
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>
+
+<!--<ion-nav [root]="rootPage"></ion-nav>-->
