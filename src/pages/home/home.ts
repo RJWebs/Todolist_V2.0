@@ -86,7 +86,8 @@ export class HomePage implements OnInit {
     }
     else
     {
-      this.todoList = this.todoList.filter(t=>t.taskname.includes(this.myInput));
+      // this.todoList = this.todoList.filter(t=>t.taskname.includes(this.myInput));
+      this.getFilteredDataStorage();
     }
   }
 
@@ -98,6 +99,21 @@ export class HomePage implements OnInit {
       if(result) {
         result.forEach(element => {
           this.todoList.push(element);
+        })
+      }
+    })
+  }
+  getFilteredDataStorage()
+  {
+     this.storage.get(this.STORAGE_KEY).then(result => {
+      this.todoList = [];
+
+      if(result) {
+        result.forEach(element => {
+          if(element.taskname.includes(this.myInput))
+          {
+          this.todoList.push(element);
+          }
         })
       }
     })
