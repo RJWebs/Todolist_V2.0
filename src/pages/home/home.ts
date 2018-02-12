@@ -75,25 +75,25 @@ export class HomePage implements OnInit {
 
   public toggle(): void {
        this.toggled = this.toggled ? false : true;
+       if(this.toggled == false)
+       {
+         this.myInput = "";
+          this.getDataFromStorage();
+       }
     }
   onInput()
   {
     console.log(this.myInput);
     // this.todoList = this.todoList.filter(t=>t.taskname == this.myInput);
-    if(this.myInput == "" || this.myInput == null)
-    {
+    
       this.getDataFromStorage();
-    }
-    else
-    {
-      // this.todoList = this.todoList.filter(t=>t.taskname.includes(this.myInput));
-      this.getFilteredDataStorage();
-    }
   }
 
   getDataFromStorage()
   {
-    this.storage.get(this.STORAGE_KEY).then(result => {
+    if(this.myInput == "" || this.myInput == null)
+    {
+      this.storage.get(this.STORAGE_KEY).then(result => {
       this.todoList = [];
 
       if(result) {
@@ -102,10 +102,10 @@ export class HomePage implements OnInit {
         })
       }
     })
-  }
-  getFilteredDataStorage()
-  {
-     this.storage.get(this.STORAGE_KEY).then(result => {
+    }
+    else
+    {
+       this.storage.get(this.STORAGE_KEY).then(result => {
       this.todoList = [];
 
       if(result) {
@@ -117,5 +117,7 @@ export class HomePage implements OnInit {
         })
       }
     })
+    }
+    
   }
 }
