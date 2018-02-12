@@ -66,12 +66,16 @@ export class HomePage implements OnInit {
   }
 
   //change important color on click
-  changeImportant(color) {
-    if(color === "dark") {
-      this.color = 'danger';
-    }
-    else {
+  changeImportant(i) {
+    if(this.todoList[i].important) {
+      this.todoList[i].important = false,
+      //save to storage
       this.color = 'dark';
+    } 
+    else {
+      this.todoList[i].important = true;
+      //save to storage
+      this.color = 'danger';
     }
   }
 
@@ -126,8 +130,34 @@ export class HomePage implements OnInit {
         })
       }
     })
-    }
-    
+    }   
+  }
+
+  deleteTask(i) {
+    let confirm = this.alertCtrl.create({
+      title: 'Do you want to delete this task?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Agree clicked');
+            this.todoList.splice(i, 1);
+            this.storage.set(this.STORAGE_KEY, this.todoList);
+            this.selectedTask = null;
+            this.showId = null;
+            this.navCtrl.popToRoot();
+          }
+        }
+      ]
+    });
+    confirm.present()
   }
 
 }

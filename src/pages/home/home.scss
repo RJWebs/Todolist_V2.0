@@ -25,6 +25,9 @@
 
 ion-card {
   padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
 }
 
 ion-grid {
@@ -36,7 +39,7 @@ ion-card-header {
 }
 
 // .alert-title {
-//   color: #488aff;
+//   font-size: 0px;
 // }
 
 
