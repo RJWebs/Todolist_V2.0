@@ -18,7 +18,7 @@ export class AddtaskPage {
     tasktype: '',
     startdate: '',
     enddate: '',
-    createdate: new Date().toISOString(),
+    createdate: new Date(),
     taskstatus: 'In Progress',
     important: false
   };

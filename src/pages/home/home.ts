@@ -18,6 +18,9 @@ import { ViewtaskPage } from "../viewtask/viewtask";
 })
 export class HomePage implements OnInit {
 
+  public toggled: boolean = false;
+  myInput : string = "";
+
   listType: string = "All List";
   todoList: any [] = [];
   addtaskPage = AddtaskPage; 
@@ -29,21 +32,15 @@ export class HomePage implements OnInit {
   selectedTask = null;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
-              public alertCtrl: AlertController, public modalCtrl: ModalController) {}
+              public alertCtrl: AlertController, public modalCtrl: ModalController) {
+                this.toggled = false;
+  }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
 
     //get data from storage and display
-    this.storage.get(this.STORAGE_KEY).then(result => {
-      this.todoList = [];
-
-      if(result) {
-        result.forEach(element => {
-          this.todoList.push(element);
-        })
-      }
-    })
+    this.getDataFromStorage();
   } 
 
   ngOnInit()
@@ -86,36 +83,51 @@ export class HomePage implements OnInit {
     myModal.present();
   }
 
-  //view task detail
-  // showAlert(i) {
-  //   let task = this.todoList[i];
+  public toggle(): void {
+       this.toggled = this.toggled ? false : true;
+       if(this.toggled == false)
+       {
+         this.myInput = "";
+          this.getDataFromStorage();
+       }
+    }
 
-  //   let icon = '';
+  onInput()
+  {
+    console.log(this.myInput);
+    this.getDataFromStorage();
+  }
 
-  //   if(task.tasktype==='Personal') {
-  //     console.log('in');
-  //     icon = 'person';
-  //   }
-  //   if(task.tasktype==='Office') {
-  //     icon = 'briefcase';
-  //   }
-  //   if(task.tasktype==='Wishlist') {
-  //     icon = 'heart';
-  //   }
-  //   if(task.tasktype==='Shopping') {
-  //     icon = 'cart';
-  //   }
+  getDataFromStorage()
+  {
+    if(this.myInput == "" || this.myInput == null)
+    {
+      this.storage.get(this.STORAGE_KEY).then(result => {
+      this.todoList = [];
 
-  //   let alert = this.alertCtrl.create({
-  //     title: task.taskname,
-  //     message: '<p><ion-icon name="cart"></ion-icon>'+task.tasktype+'</p>' +
-  //               '<p>'+task.startdate+'</p>' +
-  //               '<p>'+task.enddate+'</p>' +
-  //               '<p style="color:blue !important">'+task.description+'</p>' +
-  //               '<p>date</p>',
-  //     buttons: ['Ok']
-  //   });
-  //   alert.present()
-  // }
+      if(result) {
+        result.forEach(element => {
+          this.todoList.push(element);
+        })
+      }
+    })
+    }
+    else
+    {
+       this.storage.get(this.STORAGE_KEY).then(result => {
+      this.todoList = [];
+
+      if(result) {
+        result.forEach(element => {
+          if(element.taskname.toLowerCase().includes(this.myInput.toLowerCase()))
+          {
+          this.todoList.push(element);
+          }
+        })
+      }
+    })
+    }
+    
+  }
 
 }

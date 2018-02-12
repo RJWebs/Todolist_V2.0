@@ -32,7 +32,7 @@
           <span *ngIf="important" color="dark" style="font-size:15px; color:red"><ion-icon name="star"></ion-icon></span>
         </h4>
         <hr>
-        <span style="color:gray">Task created on {{createdate}}</span>
+        <span style="color:gray">Task created on {{createdate | date:'fullDate'}}</span>
       </ion-col>
     </ion-row>
 
