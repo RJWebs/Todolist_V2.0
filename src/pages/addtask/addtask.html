@@ -1,0 +1,68 @@
+
+<ion-header>
+
+  <ion-navbar class="bar-light">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-title><span style="color:white">New Task</span></ion-title>
+          </ion-col>
+          <ion-col col-2>
+            <button type="submit" form="taskForm" style="background-color:#488aff">
+              <ion-icon name="checkmark" style="color:white; font-size:26px"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form id="taskForm" (ngSubmit)="addTask()">
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label stacked color="primary">Task Name</ion-label>
+    <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked color="primary">Description</ion-label>
+    <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
+  </ion-item>
+
+  <ion-label stacked color="primary" style="margin-left:17px;">Add to List</ion-label>
+  <ion-item> 
+    <ion-label>Default</ion-label>
+
+    <ion-select interface="action-sheet" [(ngModel)]="todo.tasktype" name="tasktype">
+      <ion-option value="Personal"><ion-icon name="home"></ion-icon>Personal</ion-option>
+      <ion-option value="Office">Office</ion-option>
+      <ion-option value="Wishlist">Wishlist</ion-option>
+      <ion-option value="Shopping">Shopping</ion-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-label stacked color="primary" style="margin-left:17px;">Start Date</ion-label>
+  <ion-item>
+    <ion-label>Start Date</ion-label>
+    <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate"></ion-datetime>
+  </ion-item>
+
+  <ion-label stacked color="primary" style="margin-left:17px;">End Date</ion-label>
+  <ion-item>
+    <ion-label>End Date</ion-label>
+    <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate"></ion-datetime>
+  </ion-item>
+
+  </ion-list>
+
+ </form>
+
+ <!--<form id="taskForm" (ngSubmit)="addTask()">
+   <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
+   <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
+ </form>-->
+</ion-content>

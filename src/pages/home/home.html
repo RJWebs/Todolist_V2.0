@@ -1,20 +1,119 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle class="menubtn">
+    <ion-grid>
+      <ion-row class="headerColor">
+
+        <ion-col col-3>
+          <button ion-button menuToggle class="menubtn">
             <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+          </button>   
+        </ion-col>
+
+        <ion-col col-6 style="padding-top:10px">
+          <ion-title >
+            <span class="listname">{{listType}}</span>
+          </ion-title> 
+        </ion-col>
+
+        <ion-col col-3>
+          <ion-row>
+            <ion-col col-3><ion-icon name="search"></ion-icon></ion-col>
+            <ion-col col-6></ion-col>
+            <ion-col col-3><ion-icon name="more"></ion-icon></ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-fab bottom right>
+   <button ion-fab [navPush]="addtaskPage"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <div *ngFor='let item of todoList; let i=index'>
+    <div (click)="selectTask(i)">
+      <ion-card>
+
+        <ion-grid>
+          <ion-row>
+            
+            <ion-col col-1 style="padding:5px; padding-top:25px; text-align:center">
+              <!--<ion-radio value="i" color="secondary" [disabled]="true" [checked]="false" *ngIf="selectedTask != i"></ion-radio>-->
+              <!--/<ion-radio value="i" color="secondary" [disabled]="false" [checked]="true" *ngIf="selectedTask === i"></ion-radio>-->
+              <!--<ion-icon name="briefcase" style="color:#9A5AD6" *ngIf="item.tasktype==='Office'"></ion-icon>
+              <ion-icon name="cart" style="color:#F5993D" *ngIf="item.tasktype==='Shopping'"></ion-icon>
+              <ion-icon name="heart" style="color:#F56CB3" *ngIf="item.tasktype==='Wishlist'"></ion-icon>
+              <ion-icon name="person" style="color:#4CA978" *ngIf="item.tasktype==='Personal'"></ion-icon>-->
+              <!--2DC0A7-->
+              <button ion-button small style="background-color:#F5993D; color:white; height:34px" *ngIf="item.tasktype==='Shopping'"><ion-icon name="cart"></ion-icon></button>
+              <button ion-button small style="background-color:#F56CB3; color:white; height:34px" *ngIf="item.tasktype==='Wishlist'"><ion-icon name="heart"></ion-icon></button>
+              <button ion-button small style="background-color:#14CFE5; color:white; height:34px" *ngIf="item.tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
+              <button ion-button small style="background-color:#CF28F8; color:white; height:34px" *ngIf="item.tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
+            </ion-col>
+
+            <ion-col col-11>
+              <ion-card-header>      
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-9>
+                      {{item.taskname}} <br> <span style="color:gray">{{item.tasktype}}</span>
+                    </ion-col>
+                    <ion-col col-2>
+                      <button style="background-color:white" (click)="changeShow(i)">
+                        <ion-icon name="arrow-dropdown" color="primary" *ngIf="showId != i"></ion-icon>
+                        <ion-icon name="arrow-dropup" color="primary" *ngIf="showId === i"></ion-icon>
+                      </button>
+                    </ion-col>
+                    <ion-col col-1>
+                      <button style="background-color:white" (click)="showAlert(i)">
+                        <ion-icon name="eye" color="primary"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>                       
+              </ion-card-header>
+
+              <ion-card-content style="color:gray">
+                <div *ngIf="showId === i">
+
+                <ion-grid *ngIf=item.startdate style="padding:0">
+                  <ion-row>
+                    <ion-col col-1><ion-icon name="calendar"></ion-icon></ion-col>
+                    <ion-col col-11>{{item.startdate | date:'fullDate'}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+
+                <hr>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      <button ion-button icon-only small clear color="dark"><ion-icon name="create"></ion-icon></button>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button icon-only small clear color="danger" *ngIf="item.taskstatus==='Important'"><ion-icon name="star"></ion-icon></button>
+                      <button ion-button icon-only small clear color="dark" *ngIf="item.taskstatus!='Important'" (click)="changeImprtant()"><ion-icon name="star"></ion-icon></button>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button icon-only small clear color="dark"><ion-icon name="checkmark"></ion-icon></button>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button icon-only small clear color="dark"><ion-icon name="trash"></ion-icon></button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                </div>
+              </ion-card-content>
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
+
+

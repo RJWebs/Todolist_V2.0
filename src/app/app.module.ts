@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TaskserviceProvider } from '../providers/taskservice/taskservice';
 import { IonicStorageModule } from '@ionic/storage';
+import { AddtaskPage } from "../pages/addtask/addtask";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AddtaskPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AddtaskPage
   ],
   providers: [
     StatusBar,
