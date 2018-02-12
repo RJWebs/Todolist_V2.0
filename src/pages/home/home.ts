@@ -17,6 +17,9 @@ import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 })
 export class HomePage implements OnInit {
 
+  public toggled: boolean = false;
+  myInput : string = "";
+
   listType: string = "All List";
   todoList: any [] = [];
   addtaskPage = AddtaskPage; 
@@ -26,21 +29,16 @@ export class HomePage implements OnInit {
   color = "dark"
   selectedTask = null;
 
-  constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage) {}
+  constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage) {
+
+    this.toggled = false;
+  }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
 
     //get data from storage and display
-    this.storage.get(this.STORAGE_KEY).then(result => {
-      this.todoList = [];
-
-      if(result) {
-        result.forEach(element => {
-          this.todoList.push(element);
-        })
-      }
-    })
+    this.getDataFromStorage();
   } 
 
   ngOnInit()
@@ -75,4 +73,33 @@ export class HomePage implements OnInit {
     }
   }
 
+  public toggle(): void {
+       this.toggled = this.toggled ? false : true;
+    }
+  onInput()
+  {
+    console.log(this.myInput);
+    // this.todoList = this.todoList.filter(t=>t.taskname == this.myInput);
+    if(this.myInput == "" || this.myInput == null)
+    {
+      this.getDataFromStorage();
+    }
+    else
+    {
+      this.todoList = this.todoList.filter(t=>t.taskname.includes(this.myInput));
+    }
+  }
+
+  getDataFromStorage()
+  {
+    this.storage.get(this.STORAGE_KEY).then(result => {
+      this.todoList = [];
+
+      if(result) {
+        result.forEach(element => {
+          this.todoList.push(element);
+        })
+      }
+    })
+  }
 }
