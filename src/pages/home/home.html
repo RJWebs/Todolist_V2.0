@@ -38,7 +38,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-fab bottom right>
    <button ion-fab [navPush]="addtaskPage"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
@@ -50,7 +50,7 @@
         <ion-grid>
           <ion-row>
             
-            <ion-col col-1 style="padding:5px; padding-top:25px; text-align:center">
+            <ion-col col-1 style="padding:5px; padding-top:8px; text-align:center">
               <!--<ion-radio value="i" color="secondary" [disabled]="true" [checked]="false" *ngIf="selectedTask != i"></ion-radio>-->
               <!--/<ion-radio value="i" color="secondary" [disabled]="false" [checked]="true" *ngIf="selectedTask === i"></ion-radio>-->
               <!--<ion-icon name="briefcase" style="color:#9A5AD6" *ngIf="item.tasktype==='Office'"></ion-icon>
@@ -76,13 +76,13 @@
                     </ion-col>
                     <ion-col col-2>
                       <button style="background-color:white" (click)="changeShow(i)">
-                        <ion-icon name="arrow-dropdown" color="primary" *ngIf="showId != i"></ion-icon>
-                        <ion-icon name="arrow-dropup" color="primary" *ngIf="showId === i"></ion-icon>
+                        <ion-icon style="font-size:20px" name="arrow-dropdown" color="dark" *ngIf="showId != i"></ion-icon>
+                        <ion-icon style="font-size:20px" name="arrow-dropup" color="dark" *ngIf="showId === i"></ion-icon>
                       </button>
                     </ion-col>
                     <ion-col col-1>
                       <button style="background-color:white" (click)="openModal(i)"> 
-                        <ion-icon name="eye" color="primary"></ion-icon>
+                        <ion-icon name="eye" style="color:black"></ion-icon>
                       </button>
                     </ion-col>
                   </ion-row>
@@ -102,16 +102,16 @@
                 <hr>
                 <ion-grid>
                   <ion-row>
-                    <ion-col>
+                    <ion-col class="iconpadding">
                       <button ion-button icon-only small clear color="dark"><ion-icon name="create"></ion-icon></button>
                     </ion-col>
-                    <ion-col>
+                    <ion-col class="iconpadding">
                       <button ion-button icon-only small clear color="{{color}}" (click)="changeImportant(i)"><ion-icon name="star"></ion-icon></button>
                     </ion-col>
-                    <ion-col>
+                    <ion-col class="iconpadding">
                       <button ion-button icon-only small clear color="dark"><ion-icon name="checkmark"></ion-icon></button>
                     </ion-col>
-                    <ion-col>
+                    <ion-col class="iconpadding">
                       <button ion-button icon-only small clear color="dark" (click)="deleteTask(i)"><ion-icon name="trash"></ion-icon></button>
                     </ion-col>
                   </ion-row>

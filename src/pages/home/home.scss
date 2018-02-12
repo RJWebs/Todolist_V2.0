@@ -1,7 +1,7 @@
 
 .toolbar-background {
   // background-color: #488aff;
-  // background-color: white;
+  //background-color: #0D92C4;
 }
 
 .headerColor {
@@ -28,6 +28,7 @@ ion-card {
   margin-left: 0 !important;
   margin-right: 0 !important;
   width: 100% !important;
+  margin: 0 !important;
 }
 
 ion-grid {
@@ -36,6 +37,18 @@ ion-grid {
 
 ion-card-header {
   padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+ion-card-content {
+  padding-bottom: 0 !important;
+}
+
+.iconpadding {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 // .alert-title {
