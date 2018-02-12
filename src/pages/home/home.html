@@ -47,11 +47,11 @@
               <ion-icon name="cart" style="color:#F5993D" *ngIf="item.tasktype==='Shopping'"></ion-icon>
               <ion-icon name="heart" style="color:#F56CB3" *ngIf="item.tasktype==='Wishlist'"></ion-icon>
               <ion-icon name="person" style="color:#4CA978" *ngIf="item.tasktype==='Personal'"></ion-icon>-->
-              <!--2DC0A7-->
               <button ion-button small style="background-color:#F5993D; color:white; height:34px" *ngIf="item.tasktype==='Shopping'"><ion-icon name="cart"></ion-icon></button>
               <button ion-button small style="background-color:#F56CB3; color:white; height:34px" *ngIf="item.tasktype==='Wishlist'"><ion-icon name="heart"></ion-icon></button>
-              <button ion-button small style="background-color:#14CFE5; color:white; height:34px" *ngIf="item.tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
+              <button ion-button small style="background-color:#2DC0A7; color:white; height:34px" *ngIf="item.tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
               <button ion-button small style="background-color:#CF28F8; color:white; height:34px" *ngIf="item.tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
+              <button ion-button small style="background-color:#14CFE5; color:white; height:34px" *ngIf="item.tasktype===''"><ion-icon name="clipboard"></ion-icon></button>
             </ion-col>
 
             <ion-col col-11>
@@ -59,7 +59,10 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-9>
-                      {{item.taskname}} <br> <span style="color:gray">{{item.tasktype}}</span>
+                      {{item.taskname}} 
+                      <br> 
+                      <span *ngIf="item.tasktype!=''" style="color:gray">{{item.tasktype}}</span>
+                      <span *ngIf="item.tasktype===''" style="color:gray">Default</span>
                     </ion-col>
                     <ion-col col-2>
                       <button style="background-color:white" (click)="changeShow(i)">
@@ -68,7 +71,7 @@
                       </button>
                     </ion-col>
                     <ion-col col-1>
-                      <button style="background-color:white" (click)="showAlert(i)">
+                      <button style="background-color:white" (click)="openModal(i)"> 
                         <ion-icon name="eye" color="primary"></ion-icon>
                       </button>
                     </ion-col>

@@ -18,8 +18,9 @@ export class AddtaskPage {
     tasktype: '',
     startdate: '',
     enddate: '',
-    createdate: '',
-    taskstatus: 'In Progress'
+    createdate: new Date().toISOString(),
+    taskstatus: 'In Progress',
+    important: false
   };
 
   todolist: any [] = [];

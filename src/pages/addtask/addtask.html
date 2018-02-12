@@ -5,11 +5,11 @@
       <ion-grid>
         <ion-row>
           <ion-col col-10>
-            <ion-title><span style="color:white">New Task</span></ion-title>
+            <ion-title><span style="color:#2B2B2B">New Task</span></ion-title>
           </ion-col>
           <ion-col col-2>
-            <button type="submit" form="taskForm" style="background-color:#488aff">
-              <ion-icon name="checkmark" style="color:white; font-size:26px"></ion-icon>
+            <button type="submit" form="taskForm" style="background-color:whitesmoke">
+              <ion-icon name="checkmark" style="color:#488aff; font-size:26px"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
@@ -24,18 +24,18 @@
   <ion-list>
 
   <ion-item>
-    <ion-label stacked color="primary">Task Name</ion-label>
+    <ion-label stacked color="primary" style="font-size:15px">Task Name</ion-label>
     <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked color="primary">Description</ion-label>
+    <ion-label stacked color="primary" style="font-size:15px">Description</ion-label>
     <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
   </ion-item>
 
-  <ion-label stacked color="primary" style="margin-left:17px;">Add to List</ion-label>
+  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Add to List</ion-label>
   <ion-item> 
-    <ion-label>Default</ion-label>
+    <ion-label style="font-weight:normal">Default</ion-label>
 
     <ion-select interface="action-sheet" [(ngModel)]="todo.tasktype" name="tasktype">
       <ion-option value="Personal"><ion-icon name="home"></ion-icon>Personal</ion-option>
@@ -45,15 +45,15 @@
     </ion-select>
   </ion-item>
   
-  <ion-label stacked color="primary" style="margin-left:17px;">Start Date</ion-label>
+  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Start Date</ion-label>
   <ion-item>
-    <ion-label>Start Date</ion-label>
+    <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
     <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate"></ion-datetime>
   </ion-item>
 
-  <ion-label stacked color="primary" style="margin-left:17px;">End Date</ion-label>
+  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">End Date</ion-label>
   <ion-item>
-    <ion-label>End Date</ion-label>
+    <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
     <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate"></ion-datetime>
   </ion-item>
 
