@@ -8,12 +8,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { MenuController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import {TaskserviceProvider} from '../providers/taskservice/taskservice';
+import { FinishtaskPage } from "../pages/finishtask/finishtask";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = TabsPage;
+  finishtaskPage = FinishtaskPage;
   @ViewChild('content') nav: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, 
@@ -35,7 +37,8 @@ export class MyApp {
   }
 
   selectFinishedList() {
-    
+    this.closeMenu();
+    this.nav.push(this.finishtaskPage);
   }
 
   closeMenu() {

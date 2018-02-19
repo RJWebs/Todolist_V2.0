@@ -1,13 +1,7 @@
-<!--
-  Generated template for the FinishtaskPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>finishtask</ion-title>
+    <ion-title><span style="color:white">Completed Tasks</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +9,51 @@
 
 <ion-content padding>
 
+  <div *ngFor='let item of finishedtaskList; let i=index'>
+    <div>
+      <ion-card>
+
+        <ion-grid>
+          <ion-row>
+            
+            <ion-col col-1 style="padding:5px; padding-top:8px; text-align:center">
+              <button ion-button small style="background-color:#F5993D; color:white; height:34px" *ngIf="item.tasktype==='Shopping'"><ion-icon name="cart"></ion-icon></button>
+              <button ion-button small style="background-color:#F56CB3; color:white; height:34px" *ngIf="item.tasktype==='Wishlist'"><ion-icon name="heart"></ion-icon></button>
+              <button ion-button small style="background-color:#2DC0A7; color:white; height:34px" *ngIf="item.tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
+              <button ion-button small style="background-color:#CF28F8; color:white; height:34px" *ngIf="item.tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
+              <button ion-button small style="background-color:#14CFE5; color:white; height:34px" *ngIf="item.tasktype===''"><ion-icon name="clipboard"></ion-icon></button>
+            </ion-col>
+
+            <ion-col col-11>
+              <ion-card-header>      
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-9>
+                      {{item.taskname}} 
+                      <br> 
+                      <span *ngIf="item.tasktype!=''" style="color:gray">{{item.tasktype}}</span>
+                      <span *ngIf="item.tasktype===''" style="color:gray">Default</span>
+                    </ion-col>
+                    <ion-col col-2>
+                      <button style="background-color:white" (click)="reAddTask(i)">
+                        <ion-icon style="font-size:18px; color:gray" name="add-circle"></ion-icon>
+                      </button>
+                    </ion-col>
+                    <ion-col col-1>
+                      <button style="background-color:white" (click)="deleteTask(i)"> 
+                        <ion-icon name="trash" style="font-size:18px; color:gray"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>                       
+              </ion-card-header>
+
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

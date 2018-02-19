@@ -5,7 +5,6 @@ import { AddtaskPage } from "../addtask/addtask";
 import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
-import { FinishtaskPage } from "../finishtask/finishtask";
 
 @Component({
   selector: 'page-home',
@@ -21,7 +20,6 @@ export class HomePage implements OnInit {
   addtaskPage = AddtaskPage; 
   viewtaskPage = ViewtaskPage;
   updatetaskPage = UpdatetaskPage;
-  finishtaskPage = FinishtaskPage;
   STORAGE_KEY = 'todo_item'; 
 
   finishedtask;
@@ -111,14 +109,22 @@ export class HomePage implements OnInit {
 
       if(result) {
         result.forEach(element => {
-          this.todoList.push(element);
+          console.log(this.listType);
+          if(this.listType === "" || this.listType === "All Lists") {
+            this.todoList.push(element);
+          } 
+          else {
+            if(element.tasktype === this.listType) {
+              this.todoList.push(element);
+            }
+          }        
         })
       }
     })
     }
     else
     {
-       this.storage.get(this.STORAGE_KEY).then(result => {
+      this.storage.get(this.STORAGE_KEY).then(result => {
       this.todoList = [];
 
       if(result) {
