@@ -13,7 +13,7 @@
           <ion-title *ngIf="!toggled" style="margin-top:5px;">
             <span class="listname">{{listType}}</span>
           </ion-title> 
-            <ion-searchbar *ngIf="toggled" style="height:25px!important;margin-top:2px;"
+            <ion-searchbar *ngIf="toggled" style="height:28px!important;margin-top:2px;"
               [(ngModel)]="myInput"
               [showCancelButton]="shouldShowCancel"
               (ionInput)="onInput($event)"
@@ -71,8 +71,8 @@
                     <ion-col col-9>
                       {{item.taskname}} 
                       <br> 
-                      <span *ngIf="item.tasktype!=''" style="color:gray">{{item.tasktype}}</span>
-                      <span *ngIf="item.tasktype===''" style="color:gray">Default</span>
+                      <span *ngIf="item.tasktype!=''" style="color:gray; font-size:13px">{{item.tasktype}}</span>
+                      <span *ngIf="item.tasktype===''" style="color:gray; font-size:13px">Default</span>
                     </ion-col>
                     <ion-col col-2>
                       <button style="background-color:white" (click)="changeShow(i)">
