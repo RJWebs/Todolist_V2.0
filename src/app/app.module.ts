@@ -14,6 +14,8 @@ import { TaskserviceProvider } from '../providers/taskservice/taskservice';
 import { IonicStorageModule } from '@ionic/storage';
 import { AddtaskPage } from "../pages/addtask/addtask";
 import { ViewtaskPage } from "../pages/viewtask/viewtask";
+import { UpdatetaskPage } from "../pages/updatetask/updatetask";
+import { FinishtaskPage } from "../pages/finishtask/finishtask";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ViewtaskPage } from "../pages/viewtask/viewtask";
     HomePage,
     TabsPage,
     AddtaskPage,
-    ViewtaskPage
+    ViewtaskPage,
+    UpdatetaskPage,
+    FinishtaskPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,9 @@ import { ViewtaskPage } from "../pages/viewtask/viewtask";
     HomePage,
     TabsPage,
     AddtaskPage,
-    ViewtaskPage
+    ViewtaskPage,
+    UpdatetaskPage,
+    FinishtaskPage
   ],
   providers: [
     StatusBar,

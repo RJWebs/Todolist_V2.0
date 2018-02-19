@@ -4,13 +4,8 @@ import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { AddtaskPage } from "../addtask/addtask";
 import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 import { ViewtaskPage } from "../viewtask/viewtask";
-
-// import { Component, OnInit} from '@angular/core';
-// import { NavController } from 'ionic-angular';
-
-// import { MenuController, AlertController } from 'ionic-angular';
-// import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
-// import { AddtaskPage } from "../addtask/addtask";
+import { UpdatetaskPage } from "../updatetask/updatetask";
+import { FinishtaskPage } from "../finishtask/finishtask";
 
 @Component({
   selector: 'page-home',
@@ -25,7 +20,13 @@ export class HomePage implements OnInit {
   todoList: any [] = [];
   addtaskPage = AddtaskPage; 
   viewtaskPage = ViewtaskPage;
+  updatetaskPage = UpdatetaskPage;
+  finishtaskPage = FinishtaskPage;
   STORAGE_KEY = 'todo_item'; 
+
+  finishedtask;
+  finishedtaskList: any[] = [];
+  FINISHED_KEY = 'completed_item';
 
   showId = null;
   color = "dark"
@@ -68,15 +69,12 @@ export class HomePage implements OnInit {
   //change important color on click
   changeImportant(i) {
     if(this.todoList[i].important) {
-      this.todoList[i].important = false,
-      //save to storage
-      this.color = 'dark';
+      this.todoList[i].important = false;
     } 
     else {
       this.todoList[i].important = true;
-      //save to storage
-      this.color = 'danger';
     }
+    //this.storage.set(this.STORAGE_KEY, this.todoList);
   }
 
   //view task details
@@ -96,12 +94,14 @@ export class HomePage implements OnInit {
        }
     }
 
+  //get data from storage on keypress
   onInput()
   {
     console.log(this.myInput);
     this.getDataFromStorage();
   }
 
+  //function to get data from storage
   getDataFromStorage()
   {
     if(this.myInput == "" || this.myInput == null)
@@ -133,6 +133,7 @@ export class HomePage implements OnInit {
     }   
   }
 
+  //delete tasks
   deleteTask(i) {
     let confirm = this.alertCtrl.create({
       title: 'Do you want to delete this task?',
@@ -152,12 +153,50 @@ export class HomePage implements OnInit {
             this.storage.set(this.STORAGE_KEY, this.todoList);
             this.selectedTask = null;
             this.showId = null;
-            this.navCtrl.popToRoot();
+            //this.navCtrl.popToRoot();
           }
         }
       ]
     });
     confirm.present()
   }
+
+  //navigate into updatetask page
+  updateTask(i) {
+    this.navCtrl.push(this.updatetaskPage, {'task':this.todoList[i], taskindex:i});
+  }
+
+  //remove finished items from storage and put into another storage 
+  completeTask(i) {
+    this.storage.get(this.STORAGE_KEY).then(result => {
+        this.todoList = [];
+        
+        result.forEach(element => {
+          if(result.indexOf(element)===i) {            
+            this.finishedtask = element;
+            console.log("finishtask "+ this.finishedtask.taskname+" "+ this.finishedtask.description);
+          }
+          else {
+            this.todoList.push(element);
+          }
+        });
+        console.log("todolist :"+ this.todoList);
+        this.storage.set(this.STORAGE_KEY, this.todoList);
+    });
+
+    this.storage.get(this.FINISHED_KEY).then(result => {
+      if(result) {
+        result.forEach(element => {
+          this.finishedtaskList.push(element);
+        });
+        this.finishedtaskList.push(this.finishedtask);
+      } 
+      else {
+        this.finishedtaskList.push(this.finishedtask);
+      }
+      console.log("finishtask :"+ this.finishedtask);
+      this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
+    });
+  } 
 
 }

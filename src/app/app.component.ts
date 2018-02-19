@@ -25,12 +25,17 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+
    selectList(listname : any)
   {
       this.taskservice.setTaskType(listname);
       this.nav.push(TabsPage);
       this.menu.close();
       
+  }
+
+  selectFinishedList() {
+    
   }
 
   closeMenu() {

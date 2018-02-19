@@ -103,13 +103,14 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col class="iconpadding">
-                      <button ion-button icon-only small clear color="dark"><ion-icon name="create"></ion-icon></button>
+                      <button ion-button icon-only small clear color="dark" (click)="updateTask(i)"><ion-icon name="create"></ion-icon></button>
                     </ion-col>
                     <ion-col class="iconpadding">
-                      <button ion-button icon-only small clear color="{{color}}" (click)="changeImportant(i)"><ion-icon name="star"></ion-icon></button>
+                      <button ion-button icon-only small clear *ngIf="item.important" color="danger" (click)="changeImportant(i)"><ion-icon name="star"></ion-icon></button>
+                      <button ion-button icon-only small clear *ngIf="!item.important" color="dark" (click)="changeImportant(i)"><ion-icon name="star"></ion-icon></button>
                     </ion-col>
                     <ion-col class="iconpadding">
-                      <button ion-button icon-only small clear color="dark"><ion-icon name="checkmark"></ion-icon></button>
+                      <button ion-button icon-only small clear color="dark" (click)="completeTask(i)"><ion-icon name="checkmark"></ion-icon></button>
                     </ion-col>
                     <ion-col class="iconpadding">
                       <button ion-button icon-only small clear color="dark" (click)="deleteTask(i)"><ion-icon name="trash"></ion-icon></button>

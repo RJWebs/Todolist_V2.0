@@ -28,8 +28,8 @@
       <ion-col col-10>
         <h4 style="color:#488aff">
           {{taskname}} <br>
-          <span style="font-size:15px; color:gray">{{tasktype}}</span> 
-          <span *ngIf="important" color="dark" style="font-size:15px; color:red"><ion-icon name="star"></ion-icon></span>
+          <span style="font-size:15px; color:gray">{{tasktype}}</span>  
+          <span *ngIf="important" style="font-size:15px; color:red"><ion-icon name="star"></ion-icon></span>
         </h4>
         <hr>
         <span style="color:gray">Task created on {{createdate | date:'fullDate'}}</span>
