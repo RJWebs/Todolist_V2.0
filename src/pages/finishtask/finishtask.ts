@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { TabsPage } from "../tabs/tabs";
 
 @Component({
   selector: 'page-finishtask',
@@ -9,7 +10,13 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 export class FinishtaskPage {
 
   finishedtaskList: any[] = [];
+  selectedTask;
   FINISHED_KEY = 'completed_item';
+
+  todoList: any[] = [];
+  STORAGE_KEY = 'todo_item';
+
+  tabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
               public alertCtrl: AlertController) {}
@@ -17,13 +24,11 @@ export class FinishtaskPage {
   ionViewDidEnter() {
     console.log('ionViewDidLoad FinishtaskPage');
 
-    //get data from storage and display
     this.getFinishedTasks();
   } 
 
+  //get data from storage and display
   getFinishedTasks() {
-    // this.finishedtaskList = [];
-    // this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
     this.storage.get(this.FINISHED_KEY).then(result => {
       if(result) {
         result.forEach(element => {
@@ -51,6 +56,61 @@ export class FinishtaskPage {
             console.log('Agree clicked');
             this.finishedtaskList.splice(i, 1);
             this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
+          }
+        }
+      ]
+    });
+    confirm.present()
+  }
+
+  //re-add task to storage 
+  reAddTask(i) {
+    let confirm = this.alertCtrl.create({
+      title: 'Do you want to re add this task?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Add',
+          handler: () => {
+            console.log('Agree clicked');
+            
+            let newList = [];
+
+            this.finishedtaskList.forEach(element => {
+              if(this.finishedtaskList.indexOf(element) != i) {
+                newList.push(element);
+              }
+              else {
+                this.selectedTask = element;
+              }
+            });
+
+            this.finishedtaskList = newList;
+            console.log(this.finishedtaskList);
+            this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
+
+            this.storage.get(this.STORAGE_KEY).then(result => {
+              if(result) {
+                result.forEach(element => {
+                  this.todoList.push(element);
+                });
+                this.todoList.push(this.selectedTask);
+              } 
+              else {
+                this.todoList.push(this.selectedTask);
+              }
+
+              this.storage.set(this.STORAGE_KEY, this.todoList);
+
+            });
+
+            this.navCtrl.push(this.tabsPage);
           }
         }
       ]
