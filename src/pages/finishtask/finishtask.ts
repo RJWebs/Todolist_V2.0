@@ -110,7 +110,9 @@ export class FinishtaskPage {
 
             });
 
-            this.navCtrl.push(this.tabsPage);
+            // this.navCtrl.setRoot(this.tabsPage);
+ 
+            this.navCtrl.popToRoot();
           }
         }
       ]

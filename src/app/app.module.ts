@@ -16,6 +16,7 @@ import { AddtaskPage } from "../pages/addtask/addtask";
 import { ViewtaskPage } from "../pages/viewtask/viewtask";
 import { UpdatetaskPage } from "../pages/updatetask/updatetask";
 import { FinishtaskPage } from "../pages/finishtask/finishtask";
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FinishtaskPage } from "../pages/finishtask/finishtask";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TaskserviceProvider
+    TaskserviceProvider,
+    LocalNotifications
   ]
 })
 export class AppModule {}

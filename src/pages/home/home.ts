@@ -5,6 +5,7 @@ import { AddtaskPage } from "../addtask/addtask";
 import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @Component({
   selector: 'page-home',
@@ -31,8 +32,18 @@ export class HomePage implements OnInit {
   selectedTask = null;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
-              public alertCtrl: AlertController, public modalCtrl: ModalController) {
+              public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications) {
                 this.toggled = false;
+
+
+                this.localNotifications.schedule({
+                    id: 1,
+                    title: 'Attention',
+                    text: 'Simons Notification',
+                    data: { mydata: 'My hidden message this is' },
+                    at: new Date(new Date().getTime() + 2 * 1000)
+                              });
+
   }
 
   ionViewDidEnter() {
@@ -42,8 +53,13 @@ export class HomePage implements OnInit {
     this.getDataFromStorage();
   } 
 
+  ionViewDidAppear() {
+    console.log("ppppp");
+  }
+
   ngOnInit()
   {
+    console.log("ng");
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
   }
@@ -191,6 +207,7 @@ export class HomePage implements OnInit {
     });
 
     this.storage.get(this.FINISHED_KEY).then(result => {
+      this.finishedtaskList = [];
       if(result) {
         result.forEach(element => {
           this.finishedtaskList.push(element);
