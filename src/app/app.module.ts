@@ -18,6 +18,7 @@ import { UpdatetaskPage } from "../pages/updatetask/updatetask";
 import { FinishtaskPage } from "../pages/finishtask/finishtask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../pages/setting/setting";
+import { SetbackgroundProvider } from '../providers/setbackground/setbackground';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { SettingPage } from "../pages/setting/setting";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TaskserviceProvider,
-    LocalNotifications
+    LocalNotifications,
+    SetbackgroundProvider
   ]
 })
 export class AppModule {}

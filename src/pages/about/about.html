@@ -16,7 +16,7 @@
  </ion-navbar> 
 </ion-header>
 
-<ion-content padding> 
+<ion-content padding #popoverContent> 
   <ion-list class="chapter-list"> 
       <button ion-item no-padding *ngFor="let chapterList of chapterLists" (click)="chapterListItemClk(event)" no-border> {{chapterList}} <img src="" item-left alt=""> </button> 
   </ion-list> 

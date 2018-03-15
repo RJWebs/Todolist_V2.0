@@ -19,7 +19,8 @@
 </ion-header>
 
 <ion-content padding>
-  <form id="taskForm" (ngSubmit)="addTask()">
+  <div style="background-color:white; opacity:0.9">
+  <form id="taskForm" (ngSubmit)="addTask()" #changecolor>
 
   <ion-list>
 
@@ -60,7 +61,7 @@
   </ion-list>
 
  </form>
-
+</div>
  <!--<form id="taskForm" (ngSubmit)="addTask()">
    <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
    <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
