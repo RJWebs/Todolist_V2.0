@@ -15,10 +15,10 @@ import { Content } from "ionic-angular/navigation/nav-interfaces";
 })
 export class HomePage implements OnInit {
 
-  // @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
+  @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
   // @ViewChild( 'content')content: Content;
-      @ViewChild('content') content: ElementRef;
+      // @ViewChild('content') content: ElementRef;
 
   public toggled: boolean = false;
   myInput : string = "";
@@ -242,7 +242,7 @@ export class HomePage implements OnInit {
   presentPopover(ev) {
 
     let popover = this.popoverCtrl.create(SettingPage, {
-      // contentEle: this.content.nativeElement,
+      contentEle: this.content.nativeElement,
       
       // textEle: this.text.nativeElement
     });

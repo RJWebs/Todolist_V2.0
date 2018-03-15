@@ -44,12 +44,13 @@ export class SettingPage {
 
   ngOnInit() {
     if (this.navParams.data) {
-      // this.contentEle = this.navParams.data.contentEle;
+      this.contentEle = this.navParams.data.contentEle;
       // this.contentEle = SettingPage;
       // this.textEle = this.navParams.data.textEle;
-      // console.log(this.contentEle);
+      console.log(this.contentEle);
       //console.log(this.textEle);
       //this.background = this.getColorName(this.contentEle.style.backgroundColor);
+      
       this.setFontFamily();
     }
   }
@@ -76,9 +77,12 @@ export class SettingPage {
 
   changeBackground(color) {
     this.background = color;
-    // console.log(this.contentEle);
-    // this.contentEle.style.backgroundColor = this.colors[color].bg;
-    // this.textEle.style.color = this.colors[color].fg;
+    console.log("change color");
+    console.log(this.contentEle);
+    this.contentEle.style.backgroundColor = this.colors[color].bg;
+    //this.textEle.style.color = this.colors[color].fg;
+//     let elm = <HTMLElement>document.querySelector("ion-content");
+// elm.style.backgroundColor = 'black';
   }
 
   changeFontSize(direction) {
