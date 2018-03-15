@@ -17,6 +17,7 @@ import { ViewtaskPage } from "../pages/viewtask/viewtask";
 import { UpdatetaskPage } from "../pages/updatetask/updatetask";
 import { FinishtaskPage } from "../pages/finishtask/finishtask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SettingPage } from "../pages/setting/setting";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     AddtaskPage,
     ViewtaskPage,
     UpdatetaskPage,
-    FinishtaskPage
+    FinishtaskPage,
+    SettingPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     AddtaskPage,
     ViewtaskPage,
     UpdatetaskPage,
-    FinishtaskPage
+    FinishtaskPage,
+    SettingPage
   ],
   providers: [
     StatusBar,

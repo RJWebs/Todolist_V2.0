@@ -1,4 +1,4 @@
-<ion-header>
+<!--<ion-header>
   <ion-navbar>
     <ion-title>
       About
@@ -8,4 +8,17 @@
 
 <ion-content padding>
 
+</ion-content>-->
+
+<ion-header> 
+  <ion-navbar>
+   <ion-title>Physics</ion-title> 
+ </ion-navbar> 
+</ion-header>
+
+<ion-content padding> 
+  <ion-list class="chapter-list"> 
+      <button ion-item no-padding *ngFor="let chapterList of chapterLists" (click)="chapterListItemClk(event)" no-border> {{chapterList}} <img src="" item-left alt=""> </button> 
+  </ion-list> 
 </ion-content>
+

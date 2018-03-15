@@ -11,4 +11,6 @@ export class AboutPage {
 
   }
 
+  chapterLists = ["chap1", "chap2", "chap3"];
+
 }

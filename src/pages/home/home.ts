@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, AlertController, ModalController } from 'ionic-angular';
+import { NavController, AlertController, ModalController, PopoverController } from 'ionic-angular';
 import { AddtaskPage } from "../addtask/addtask";
 import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SettingPage } from "../setting/setting";
+import { Content } from "ionic-angular/navigation/nav-interfaces";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
+
+  // @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
+  // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
+  // @ViewChild( 'content')content: Content;
+      @ViewChild('content') content: ElementRef;
 
   public toggled: boolean = false;
   myInput : string = "";
@@ -32,7 +39,8 @@ export class HomePage implements OnInit {
   selectedTask = null;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
-              public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications) {
+              public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
+              public popoverCtrl: PopoverController) {
                 this.toggled = false;
 
 
@@ -222,4 +230,27 @@ export class HomePage implements OnInit {
     });
   } 
 
+  // presentPopover(myEvent) {
+  //   let popover = this.popoverCtrl.create(SettingPage);
+  //   popover.present({
+  //     ev: myEvent
+  //   });
+
+  //   console.log('popover');
+  // }
+
+  presentPopover(ev) {
+
+    let popover = this.popoverCtrl.create(SettingPage, {
+      // contentEle: this.content.nativeElement,
+      
+      // textEle: this.text.nativeElement
+    });
+    // console.log(this.content);
+    popover.present({
+      ev: ev
+    });
+    console.log('in');
+  }
+  
 }
