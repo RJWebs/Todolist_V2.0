@@ -7,7 +7,7 @@ import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
-import { Content } from "ionic-angular/navigation/nav-interfaces";
+// import { Content } from "ionic-angular/navigation/nav-interfaces";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
