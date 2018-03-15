@@ -38,12 +38,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #popoverContent>
+<ion-content #popoverContent [style.backgroundImage]='imageurl' [style.fontFamily]='fontFamily'>
   <ion-fab bottom right>
    <button ion-fab [navPush]="addtaskPage"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
-  <div *ngFor='let item of todoList; let i=index' style="opacity:0.9">
+  <div *ngFor='let item of todoList; let i=index' style="opacity:0.9" >
     <div (click)="selectTask(i)">
       <ion-card>
 

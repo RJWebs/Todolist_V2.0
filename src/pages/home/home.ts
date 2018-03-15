@@ -8,6 +8,7 @@ import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
 import { Content } from "ionic-angular/navigation/nav-interfaces";
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
   selector: 'page-home',
@@ -38,9 +39,11 @@ export class HomePage implements OnInit {
   color = "dark"
   selectedTask = null;
 
+  imageurl: any;
+
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
-              public popoverCtrl: PopoverController) {
+              public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider) {
                 this.toggled = false;
 
 
@@ -56,6 +59,13 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
+
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      this.imageurl = 'url('+val+')';
+      console.log(val);
+    }).catch(error=>{
+      //handle error
+    });
 
     //get data from storage and display
     this.getDataFromStorage();
@@ -242,11 +252,9 @@ export class HomePage implements OnInit {
   presentPopover(ev) {
 
     let popover = this.popoverCtrl.create(SettingPage, {
-      contentEle: this.content.nativeElement,
-      
+      contentEle: this.content.nativeElement,     
       // textEle: this.text.nativeElement
     });
-    // console.log(this.content);
     popover.present({
       ev: ev
     });

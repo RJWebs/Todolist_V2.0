@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
   selector: 'page-updatetask',
@@ -23,7 +24,10 @@ export class UpdatetaskPage {
   todolist: any[] = [];
   STORAGE_KEY = 'todo_item';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  imageurl: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
+              public setBackgroundProvider: SetbackgroundProvider) {
     // this.todo.description = navParams.get('description');
     this.todo.taskname = navParams.data.task.taskname; 
     this.todo.description = navParams.data.task.description;
@@ -38,6 +42,15 @@ export class UpdatetaskPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdatetaskPage');
+  }
+
+  ionViewDidEnter() {
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      this.imageurl = 'url('+val+')';
+      console.log(val);
+    }).catch(error=>{
+      //handle error
+    });
   }
   
   //edit task

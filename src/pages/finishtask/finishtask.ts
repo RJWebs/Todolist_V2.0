@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabsPage } from "../tabs/tabs";
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
   selector: 'page-finishtask',
@@ -17,12 +18,20 @@ export class FinishtaskPage {
   STORAGE_KEY = 'todo_item';
 
   tabsPage = TabsPage;
+  imageurl: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
-              public alertCtrl: AlertController) {}
+              public alertCtrl: AlertController, public setBackgroundProvider: SetbackgroundProvider) {}
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad FinishtaskPage');
+
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      this.imageurl = 'url('+val+')';
+      console.log(val);
+    }).catch(error=>{
+      //handle error
+    });
 
     this.getFinishedTasks();
   } 

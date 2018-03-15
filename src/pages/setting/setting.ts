@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
   selector: 'page-setting',
@@ -7,10 +8,11 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class SettingPage {
 
-  background: string;
+  // background: string;
   contentEle: any;
-  textEle: any;
-  fontFamily;
+  // textEle: any;
+  fontFamily: 'Arial';
+  // fontsize;
 
   colors = {
     'white': {
@@ -31,7 +33,8 @@ export class SettingPage {
     },
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public setBackgroundProvider: SetbackgroundProvider) {
   }
 
   ionViewDidLoad() {
@@ -75,21 +78,23 @@ export class SettingPage {
     // }
   }
 
-  changeBackground(color) {
-    this.background = color;
-    console.log("change color");
-    console.log(this.contentEle);
-    this.contentEle.style.backgroundColor = this.colors[color].bg;
+  changeBackground(imageurl) {
+    // this.background = color;
+    // this.contentEle.style.backgroundColor = this.colors[color].bg;
+    this.contentEle.style.backgroundImage = 'url('+imageurl+')';
+    this.setBackgroundProvider.setBackground(imageurl);
     //this.textEle.style.color = this.colors[color].fg;
-//     let elm = <HTMLElement>document.querySelector("ion-content");
-// elm.style.backgroundColor = 'black';
   }
 
   changeFontSize(direction) {
+    // this.fontsize = '10px';
     // this.textEle.style.fontSize = direction;
+    // this.contentEle.style.fontSize = direction;
   }
 
-  changeFontFamily() {
+  changeFontFamily(fonttype) {
+    console.log(fonttype);
+    this.fontFamily = fonttype;
     // if (this.fontFamily) this.textEle.style.fontFamily = this.fontFamily;
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 // import { TabsPage } from "../tabs/tabs";
 
@@ -26,11 +27,23 @@ export class AddtaskPage {
   todolist: any [] = [];
   STORAGE_KEY = 'todo_item';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  imageurl: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
+              public setBackgroundProvider: SetbackgroundProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddtaskPage');
+  }
+
+  ionViewDidEnter() {
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      this.imageurl = 'url('+val+')';
+      console.log(val);
+    }).catch(error=>{
+      //handle error
+    });
   }
 
   //add data into storage

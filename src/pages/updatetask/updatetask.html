@@ -18,47 +18,49 @@
 
 </ion-header>
 
-<ion-content padding>
-  <form id="updateForm" (ngSubmit)="editTask()">
+<ion-content padding [style.backgroundImage]='imageurl'>
+  <div style="background-color:white; opacity:0.9">
+    <form id="updateForm" (ngSubmit)="editTask()">
 
-  <ion-list>
+      <ion-list>
 
-  <ion-item>
-    <ion-label stacked color="primary" style="font-size:15px">Task Name</ion-label>
-    <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label stacked color="primary" style="font-size:15px">Task Name</ion-label>
+        <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" style="font-size:15px">Description</ion-label>
-    <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label stacked color="primary" style="font-size:15px">Description</ion-label>
+        <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
+      </ion-item>
 
-  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Add to List</ion-label>
-  <ion-item> 
-    <ion-label style="font-weight:normal">Default</ion-label>
+      <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Add to List</ion-label>
+      <ion-item> 
+        <ion-label style="font-weight:normal">Default</ion-label>
 
-    <ion-select interface="action-sheet" [(ngModel)]="todo.tasktype" name="tasktype">
-      <ion-option value="Personal"><ion-icon name="home"></ion-icon>Personal</ion-option>
-      <ion-option value="Office">Office</ion-option>
-      <ion-option value="Wishlist">Wishlist</ion-option>
-      <ion-option value="Shopping">Shopping</ion-option>
-    </ion-select>
-  </ion-item>
-  
-  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Start Date</ion-label>
-  <ion-item>
-    <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
-    <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate"></ion-datetime>
-  </ion-item>
+        <ion-select interface="action-sheet" [(ngModel)]="todo.tasktype" name="tasktype">
+          <ion-option value="Personal"><ion-icon name="home"></ion-icon>Personal</ion-option>
+          <ion-option value="Office">Office</ion-option>
+          <ion-option value="Wishlist">Wishlist</ion-option>
+          <ion-option value="Shopping">Shopping</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Start Date</ion-label>
+      <ion-item>
+        <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate"></ion-datetime>
+      </ion-item>
 
-  <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">End Date</ion-label>
-  <ion-item>
-    <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
-    <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate"></ion-datetime>
-  </ion-item>
+      <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">End Date</ion-label>
+      <ion-item>
+        <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate"></ion-datetime>
+      </ion-item>
 
-  </ion-list>
+      </ion-list>
 
- </form>
+    </form>
+  </div>
 
 </ion-content>

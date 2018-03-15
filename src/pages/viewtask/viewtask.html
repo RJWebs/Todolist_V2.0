@@ -12,66 +12,70 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-grid>
 
-    <ion-row>
-      <ion-col>
-        <h3>
-        <button ion-button medium style="background-color:#F5993D; color:white; height:34px" *ngIf="tasktype==='Shopping'"><ion-icon name="cart"></ion-icon></button>
-        <button ion-button medium style="background-color:#F56CB3; color:white; height:34px" *ngIf="tasktype==='Wishlist'"><ion-icon name="heart"></ion-icon></button>
-        <button ion-button medium style="background-color:#2DC0A7; color:white; height:34px" *ngIf="tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
-        <button ion-button medium style="background-color:#CF28F8; color:white; height:34px" *ngIf="tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
-        <button ion-button medium style="background-color:#14CFE5; color:white; height:34px" *ngIf="tasktype===''"><ion-icon name="clipboard"></ion-icon></button>
-        </h3>
-      </ion-col>
-      <ion-col col-10>
-        <h4 style="color:#488aff">
-          {{taskname}} <br>
-          <span style="font-size:15px; color:gray">{{tasktype}}</span>  
-          <span *ngIf="important" style="font-size:15px; color:red"><ion-icon name="star"></ion-icon></span>
-        </h4>
-        <hr>
-        <span style="color:gray">Task created on {{createdate | date:'fullDate'}}</span>
-      </ion-col>
-    </ion-row>
+<ion-content [style.backgroundImage]='imageurl'>
+  <div style="background-color:white; opacity:0.9">
+    <ion-grid>
 
-    <br>
-    <ion-row style="margin-left:10px; font-size:16px; color: green">
-      <ion-col col-12>
-        Task {{taskstatus}}
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <h3>
+          <button ion-button medium style="background-color:#F5993D; color:white; height:34px" *ngIf="tasktype==='Shopping'"><ion-icon name="cart"></ion-icon></button>
+          <button ion-button medium style="background-color:#F56CB3; color:white; height:34px" *ngIf="tasktype==='Wishlist'"><ion-icon name="heart"></ion-icon></button>
+          <button ion-button medium style="background-color:#2DC0A7; color:white; height:34px" *ngIf="tasktype==='Personal'"><ion-icon name="person"></ion-icon></button>
+          <button ion-button medium style="background-color:#CF28F8; color:white; height:34px" *ngIf="tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
+          <button ion-button medium style="background-color:#14CFE5; color:white; height:34px" *ngIf="tasktype===''"><ion-icon name="clipboard"></ion-icon></button>
+          </h3>
+        </ion-col>
+        <ion-col col-10>
+          <h4 style="color:#488aff">
+            {{taskname}} <br>
+            <span style="font-size:15px; color:gray">{{tasktype}}</span>  
+            <span *ngIf="important" style="font-size:15px; color:red"><ion-icon name="star"></ion-icon></span>
+          </h4>
+          <hr>
+          <span style="color:gray">Task created on {{createdate | date:'fullDate'}}</span>
+        </ion-col>
+      </ion-row>
 
-    <br>
-    <ion-row style="margin-left:10px; font-size:16px">
-      <ion-col col-12>
-        Task description:
-      </ion-col>
-      <ion-col col-12 style="color:gray">
-        {{description}}
-      </ion-col>
-    </ion-row>
+      <br>
+      <ion-row style="margin-left:10px; font-size:16px; color: green">
+        <ion-col col-12>
+          Task {{taskstatus}}
+        </ion-col>
+      </ion-row>
 
-    <br>
-    <ion-row style="margin-left:10px; font-size:16px">
-      <ion-col col-12>
-        Task starts on:
-      </ion-col>
-      <ion-col col-12 style="color:gray">
-        {{startdate | date:'fullDate'}}
-      </ion-col>
-    </ion-row>
+      <br>
+      <ion-row style="margin-left:10px; font-size:16px">
+        <ion-col col-12>
+          Task description:
+        </ion-col>
+        <ion-col col-12 style="color:gray">
+          {{description}}
+        </ion-col>
+      </ion-row>
 
-    <br>
-    <ion-row style="margin-left:10px; font-size:16px">
-      <ion-col col-12>
-        Task ends on:
-      </ion-col>
-      <ion-col col-12 style="color:gray">
-        {{enddate | date:'fullDate'}}
-      </ion-col>
-    </ion-row>
+      <br>
+      <ion-row style="margin-left:10px; font-size:16px">
+        <ion-col col-12>
+          Task starts on:
+        </ion-col>
+        <ion-col col-12 style="color:gray">
+          {{startdate | date:'fullDate'}}
+        </ion-col>
+      </ion-row>
 
-  </ion-grid>
+      <br>
+      <ion-row style="margin-left:10px; font-size:16px">
+        <ion-col col-12>
+          Task ends on:
+        </ion-col>
+        <ion-col col-12 style="color:gray">
+          {{enddate | date:'fullDate'}}
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  
+  </div>
 </ion-content>

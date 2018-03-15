@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
   selector: 'page-viewtask',
@@ -25,8 +26,11 @@ export class ViewtaskPage {
   taskstatus: string;
   important: boolean;
 
+  imageurl: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public setBackgroundProvider: SetbackgroundProvider) {
     this.taskname = navParams.get('taskname');
     this.description = navParams.get('description');
     this.tasktype = navParams.get('tasktype');
@@ -39,6 +43,15 @@ export class ViewtaskPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewtaskPage');
+  }
+
+  ionViewDidEnter() {
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      this.imageurl = 'url('+val+')';
+      console.log(val);
+    }).catch(error=>{
+      //handle error
+    });
   }
 
   closeModal() {
