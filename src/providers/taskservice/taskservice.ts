@@ -1,11 +1,13 @@
 // import { NavParams } from "ionic-angular";
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class TaskserviceProvider {
   taskType : string = "All Lists";
-
+  sortDate : any = "";
+  sortDateLable :  any;
   todolist: any[] = [];
   finishedtaskList: any[] = [];
   taskindex;
@@ -13,7 +15,7 @@ export class TaskserviceProvider {
   FINISHED_KEY = 'completed_item';
   STORAGE_KEY = 'todo_item';
   
-  constructor(public storage :Storage) {}
+  constructor(public storage :Storage,private datePipe: DatePipe) {}
 
   setTaskType(taskType : any)
   {
@@ -59,5 +61,37 @@ export class TaskserviceProvider {
 
     // this.navCtrl.popToRoot();
   }
+  
+  setSortDate(date : any)
+  {
+    this.sortDate = date;
+    this.storage.set("sortdate",this.sortDate);
+  }
+  getSortDate()
+  {
+    return this.sortDate;
+  }
+  setSortDateAll()
+  {
+    this.sortDate = "";
+  }
+  getSortDateLable()
+  {
+    console.log(this.sortDate + "ss");
+    if(this.sortDate == "")
+    {
+      this.sortDateLable = "All Dates"
+    }
+    else if(this.sortDate == this.datePipe.transform(new Date, 'yyyy-MM-dd'))
+    {
+      this.sortDateLable = "Today";
+    }
+    else
+    {
+      this.sortDateLable = this.sortDate;
+    }
 
+    return this.sortDateLable;
+    
+  }
 }
