@@ -16,3 +16,12 @@ ion-label {
     font-weight: bold;
 }
 
+.error {
+    border-bottom: 1.5px solid #d9534f;
+}
+
+.errorMsg {
+    color: #d9534f;
+    font-weight: normal;
+    font-size: 13px;
+}

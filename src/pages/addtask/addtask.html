@@ -8,7 +8,7 @@
             <ion-title><span style="color:white">New Task</span></ion-title>
           </ion-col>
           <ion-col col-2>
-            <button type="submit" form="taskForm" style="background-color:#488aff">
+            <button type="submit" form="taskForm" style="background-color:#488aff" [disabled]="f.invalid">
               <ion-icon name="checkmark" style="color:white; font-size:26px"></ion-icon>
             </button>
           </ion-col>
@@ -20,15 +20,17 @@
 
 <ion-content padding [style.backgroundColor]='backgroundcolor'>
   <div style="background-color:white; opacity:0.9" [style.fontFamily]='fontFamily'>
-    <form id="taskForm" (ngSubmit)="addTask()" #changecolor>
+    <form id="taskForm" #f="ngForm" (ngSubmit)="addTask()">
 
       <ion-list>
 
       <ion-item>
         <ion-label stacked color="primary" style="font-size:15px">Task Name</ion-label>
-        <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname"></ion-input>
+        <ion-input type="text" placeholder="Task Name" [(ngModel)]="todo.taskname" name="taskname" #taskName="ngModel" required [class.error]="taskName.errors?.required && taskName.touched"></ion-input>
       </ion-item>
-
+      <ion-item *ngIf="taskName.errors?.required && taskName.touched" class="errorMsg">
+        Task Name is required
+      </ion-item>
       <ion-item>
         <ion-label stacked color="primary" style="font-size:15px">Description</ion-label>
         <ion-input type="text" placeholder="Description" [(ngModel)]="todo.description" name="description"></ion-input>
@@ -49,13 +51,13 @@
       <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">Start Date</ion-label>
       <ion-item>
         <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate"></ion-datetime>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.startdate" name="startdate" [min]="today" max="2020-10-31" (ngModelChange)="setMinDate($event)"></ion-datetime>
       </ion-item>
 
       <ion-label stacked color="primary" style="margin-left:17px; font-size:15px">End Date</ion-label>
       <ion-item>
         <ion-label><ion-icon name="calendar"></ion-icon></ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate"></ion-datetime>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]="todo.enddate" name="enddate" min="{{enddateMin}}" max="2020-10-31" [disabled]="disableEnddate"></ion-datetime>
       </ion-item>
 
       </ion-list>

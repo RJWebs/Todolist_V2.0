@@ -24,6 +24,10 @@ export class AddtaskPage {
     important: false
   };
 
+  today = new Date().toJSON();
+  enddateMin = new Date().toJSON();
+  disableEnddate: boolean = true;
+
   todolist: any [] = [];
   STORAGE_KEY = 'todo_item';
 
@@ -56,6 +60,13 @@ export class AddtaskPage {
       this.fontFamily = val;
     });
 
+  }
+
+  setMinDate(startdate) {
+    this.enddateMin = startdate;
+    console.log(this.enddateMin);
+
+    this.disableEnddate = false;
   }
 
   //add data into storage

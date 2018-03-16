@@ -50,14 +50,14 @@ export class SettingPage {
 
   ionViewDidEnter() {
     this.setBackgroundProvider.getBackground().then((val)=>{
-      if(val==='Default') {
+      if(val==='../../assets/imgs/defaultimage.jpg') {
         this.default = true;
       }
       else {
         this.default = false;
-        this.imageurl = val;
-        console.log(this.imageurl);
       }
+      this.imageurl = val;
+      console.log(this.imageurl);
     });
 
     this.setBackgroundProvider.getBackgroundColor().then((val)=>{
@@ -91,13 +91,15 @@ export class SettingPage {
   changeBackground(imageurl) {
     this.imageurl = imageurl;
 
-    if(imageurl==="Default") {
-      this.imageEle.src = '';
-    } 
-    else {
-      this.default = false;
-      this.imageEle.src = imageurl;
-    }
+    // if(imageurl==="Default") {
+    //   this.imageEle.src = '';
+    // } 
+    // else {
+    //   this.default = false;
+    //   this.imageEle.src = imageurl;
+    // }
+    this.default = false;
+    this.imageEle.src = imageurl;
     this.setBackgroundProvider.setBackground(imageurl);
   }
 
