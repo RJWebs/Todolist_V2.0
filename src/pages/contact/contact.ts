@@ -10,6 +10,7 @@ export class ContactPage {
 
   imageurl: any;
   backgroundcolor: any;
+  fontFamily = '';
 
   constructor(public navCtrl: NavController, public setBackgroundProvider: SetbackgroundProvider) {}
 
@@ -24,6 +25,12 @@ export class ContactPage {
     this.setBackgroundProvider.getBackgroundColor().then((val)=>{
       this.backgroundcolor = val;
     });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
+    });
+
   }
 
 }

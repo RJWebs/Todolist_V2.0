@@ -41,6 +41,7 @@ export class HomePage implements OnInit {
 
   imageurl: any;
   backgroundcolor: any;
+  fontFamily = '';
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
@@ -70,6 +71,11 @@ export class HomePage implements OnInit {
     //get background color from storage
     this.setBackgroundProvider.getBackgroundColor().then((val)=>{
       this.backgroundcolor = val;
+    });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
     });
 
     //get data from storage and display

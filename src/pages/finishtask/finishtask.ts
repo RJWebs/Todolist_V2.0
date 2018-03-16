@@ -20,6 +20,7 @@ export class FinishtaskPage {
   tabsPage = TabsPage;
   imageurl: any;
   backgroundcolor: any;
+  fontFamily = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
               public alertCtrl: AlertController, public setBackgroundProvider: SetbackgroundProvider) {}
@@ -35,6 +36,12 @@ export class FinishtaskPage {
     this.setBackgroundProvider.getBackgroundColor().then((val)=>{
       this.backgroundcolor = val;
     });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
+    });
+
 
     this.getFinishedTasks();
   } 

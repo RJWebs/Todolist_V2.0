@@ -10,8 +10,8 @@ export class SettingPage {
 
   contentEle: any;
   imageEle: any;
-  fontFamily;
   default: boolean;
+  fontFamily = '';
 
   colors = {
     'white': {
@@ -45,8 +45,6 @@ export class SettingPage {
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidLoad HomePage');
-
     this.setBackgroundProvider.getBackground().then((val)=>{
       if(val==='Default') {
         this.default = true;
@@ -54,6 +52,10 @@ export class SettingPage {
       else {
         this.default = false;
       }
+    });
+
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
     })
   } 
 
@@ -61,32 +63,8 @@ export class SettingPage {
     if (this.navParams.data) {
       this.contentEle = this.navParams.data.contentEle;
       this.imageEle = this.navParams.data.imageEle;
-      console.log(this.contentEle);
-      console.log(this.imageEle);
-      
-      // this.setFontFamily();
     }
   }
-
-  // getColorName(background) {
-  //   let colorName = 'white';
-
-  //   if (!background) return 'white';
-
-  //   for (var key in this.colors) {
-  //     if (this.colors[key].bg == background) {
-  //       colorName = key;
-  //     }
-  //   }
-
-  //   return colorName;
-  // }
-
-  // setFontFamily() {
-  //   // if (this.textEle.style.fontFamily) {
-  //   //   this.fontFamily = this.textEle.style.fontFamily.replace(/'/g, "");
-  //   // }
-  // }
 
   changeBackground(imageurl) {
     console.log(imageurl);
@@ -101,23 +79,14 @@ export class SettingPage {
   }
 
   changeBackgroundColor(color) {
-    console.log(color);
     this.contentEle.style.backgroundColor = this.colors[color].bg;
     let bcolor = this.colors[color].bg;
-    console.log(bcolor);
     this.setBackgroundProvider.setBackgroundColor(bcolor);
   }
 
-  // changeFontSize(direction) {
-  //   // this.fontsize = '10px';
-  //   // this.textEle.style.fontSize = direction;
-  //   // this.contentEle.style.fontSize = direction;
-  // }
-
   changeFontFamily(fonttype) {
-    console.log(fonttype);
-    this.fontFamily = fonttype;
     this.contentEle.style.fontFamily = fonttype;
+    this.setBackgroundProvider.setFontType(fonttype);
   }
 
 }

@@ -7,6 +7,7 @@ export class SetbackgroundProvider {
 
   BACKGROUND_KEY = 'image_url';
   BCOLOR_KEY = 'bcolor';
+  FONT_KEY = 'font';
 
   constructor(public storage :Storage) {}
   
@@ -28,6 +29,16 @@ export class SetbackgroundProvider {
     return this.storage.get(this.BCOLOR_KEY).then((val) => {
       return val;
     }); 
+  }
+
+  setFontType(font) {
+    this.storage.set(this.FONT_KEY, font);
+  }
+
+  getFontType() {
+    return this.storage.get(this.FONT_KEY).then((val) => {
+      return val;
+    });
   }
 
 }

@@ -28,6 +28,7 @@ export class ViewtaskPage {
 
   imageurl: any;
   backgroundcolor: any;
+  fontFamily = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public setBackgroundProvider: SetbackgroundProvider) {
@@ -56,6 +57,12 @@ export class ViewtaskPage {
     this.setBackgroundProvider.getBackgroundColor().then((val)=>{
       this.backgroundcolor = val;
     });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
+    });
+
   }
 
   closeModal() {
