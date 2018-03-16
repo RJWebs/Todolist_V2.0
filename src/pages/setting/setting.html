@@ -7,7 +7,7 @@
       <button ion-item (click)="close()">GitHub Repo</button>
 </ion-list>-->
 
-<ion-list radio-group [(ngModel)]="ChangeFontTypeTo" (ionChange)="changeFontFamily($event)" class="popover-page">
+<ion-list radio-group (ionChange)="changeFontFamily($event)" class="popover-page">
       <ion-row>
         <ion-col>
           <button (click)="changeFontSize('smaller')" ion-item detail-none class="text-button text-smaller">A</button>
@@ -16,34 +16,55 @@
           <button (click)="changeFontSize('larger')" ion-item detail-none class="text-button text-larger">A</button>
         </ion-col>
       </ion-row>
+
       <ion-row class="row-dots">
         <ion-col>
-          <ion-item>
-            <ion-avatar item-start style="border:0px solid black" (click)="changeBackground('../../assets/imgs/smile.png')">
-              <img src="../../assets/imgs/smile.png">
-            </ion-avatar>
-          </ion-item>
-          <!--<button ion-button="dot" (click)="changeBackground('white')" class="dot-white" [class.selected]="background == 'white'"></button>-->
+          <button ion-button="dot" (click)="changeBackgroundColor('white')" class="dot-white" [class.selected]="background == 'white'"></button>
         </ion-col>
         <ion-col>
+          <button ion-button="dot" (click)="changeBackgroundColor('tan')" class="dot-tan" [class.selected]="background == 'tan'"></button>
+        </ion-col>
+        <ion-col>
+          <button ion-button="dot" (click)="changeBackgroundColor('blue')" class="dot-blue" [class.selected]="background == 'blue'"></button>
+        </ion-col>
+        <ion-col>
+          <button ion-button="dot" (click)="changeBackgroundColor('gray')" class="dot-gray" [class.selected]="background === 'gray'"></button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-dots">
+        <ion-col col-3>
           <ion-item>
-            <ion-avatar item-start style="border:0px solid black" (click)="changeBackground('../../assets/imgs/flower.png')">
-              <img src="../../assets/imgs/flower.png">
+            <ion-avatar (click)="changeBackground('../../assets/imgs/girl.png')">
+              <img src="../../assets/imgs/girl.png">
             </ion-avatar>
           </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col col-3>
           <ion-item>
-            <ion-avatar item-start style="border:0px solid black" (click)="changeBackground('../../assets/imgs/bear.png')">
+            <ion-avatar (click)="changeBackground('../../assets/imgs/bear.png')">
               <img src="../../assets/imgs/bear.png">
             </ion-avatar>
           </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col col-3>
           <ion-item>
-            <ion-avatar item-start style="border:0px solid black" (click)="changeBackground('../../assets/imgs/heartnew1.png')">
-              <img src="../../assets/imgs/heartnew1.png">
+            <ion-avatar (click)="changeBackground('../../assets/imgs/heart_rain.png')">
+              <img src="../../assets/imgs/heart_rain.png">
             </ion-avatar>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-avatar (click)="changeBackground('../../assets/imgs/flower.png')">
+              <img src="../../assets/imgs/flower.png">
+            </ion-avatar>
+          </ion-item>
+        </ion-col>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label>Default Background</ion-label>
+            <ion-checkbox [(ngModel)]="default" (click)="changeBackground('Default')"></ion-checkbox>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -51,29 +72,29 @@
       <ion-list-header color="primary">
         Change font type to
       </ion-list-header>
-      <ion-item class="text-athelas">
-        <ion-label>Athelas</ion-label>
-        <ion-radio value="Athelas"></ion-radio>
+      <ion-item>
+        <ion-label>Default</ion-label>
+        <ion-radio value=""></ion-radio>
       </ion-item>
-      <ion-item class="text-charter">
-        <ion-label>Charter</ion-label>
-        <ion-radio value="Charter"></ion-radio>
+      <ion-item class="text-arial">
+        <ion-label>Arial</ion-label>
+        <ion-radio value="Arial"></ion-radio>
       </ion-item>
-      <ion-item class="text-iowan">
-        <ion-label>Iowan</ion-label>
-        <ion-radio value="Iowan"></ion-radio>
+      <ion-item class="text-calibri">
+        <ion-label>Calibri</ion-label>
+        <ion-radio value="Calibri"></ion-radio>
       </ion-item>
-      <ion-item class="text-palatino">
-        <ion-label>Palatino</ion-label>
-        <ion-radio value="Palatino"></ion-radio>
+      <ion-item class="text-courier">
+        <ion-label>Courier New</ion-label>
+        <ion-radio value="Courier New"></ion-radio>
       </ion-item>
-      <ion-item class="text-san-francisco">
-        <ion-label>San Francisco</ion-label>
-        <ion-radio value="San Francisco"></ion-radio>
+      <ion-item class="text-century">
+        <ion-label>Century</ion-label>
+        <ion-radio value="Century"></ion-radio>
       </ion-item>
-      <ion-item class="text-seravek">
-        <ion-label>Seravek</ion-label>
-        <ion-radio value="Seravek"></ion-radio>
+      <ion-item class="text-lucida">
+        <ion-label>Lucida Handwriting</ion-label>
+        <ion-radio value="Lucida Handwriting"></ion-radio>
       </ion-item>
       <ion-item class="text-times-new-roman">
         <ion-label>Times New Roman</ion-label>

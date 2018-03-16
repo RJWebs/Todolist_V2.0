@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding [style.backgroundImage]='imageurl'>
+<ion-content padding [style.backgroundColor]='backgroundcolor'>
 
   <div *ngFor='let item of finishedtaskList; let i=index'>
     <div>
@@ -55,5 +55,9 @@
 
       </ion-card>
     </div>
+  </div>
+
+  <div style="z-index:-1; width:40%; height:auto; position:absolute; bottom:15%; border:0px solid black; margin-left:30%; margin-right:30%">
+    <img src="{{imageurl}}" style="width:100%; height:auto; position:absolute; bottom:0px">
   </div>
 </ion-content>

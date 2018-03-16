@@ -19,18 +19,21 @@ export class FinishtaskPage {
 
   tabsPage = TabsPage;
   imageurl: any;
+  backgroundcolor: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
               public alertCtrl: AlertController, public setBackgroundProvider: SetbackgroundProvider) {}
 
   ionViewDidEnter() {
-    console.log('ionViewDidLoad FinishtaskPage');
-
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
+    });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
     });
 
     this.getFinishedTasks();

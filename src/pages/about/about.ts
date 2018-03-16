@@ -9,17 +9,22 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
 export class AboutPage {
 
   imageurl: any;
+  backgroundcolor: any;
 
   constructor(public navCtrl: NavController, public setBackgroundProvider: SetbackgroundProvider) {
     console.log("about");       
   }
 
   ionViewDidEnter() {
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
+    });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
     });
   }
 

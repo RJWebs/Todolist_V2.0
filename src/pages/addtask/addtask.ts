@@ -28,6 +28,7 @@ export class AddtaskPage {
   STORAGE_KEY = 'todo_item';
 
   imageurl: any;
+  backgroundcolor: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
               public setBackgroundProvider: SetbackgroundProvider) {
@@ -38,11 +39,15 @@ export class AddtaskPage {
   }
 
   ionViewDidEnter() {
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
+    });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
     });
   }
 

@@ -17,7 +17,7 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
 export class HomePage implements OnInit {
 
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
-  // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
+  @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
   // @ViewChild( 'content')content: Content;
       // @ViewChild('content') content: ElementRef;
 
@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
   selectedTask = null;
 
   imageurl: any;
+  backgroundcolor: any;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
@@ -60,24 +61,22 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
 
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
+    });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
     });
 
     //get data from storage and display
     this.getDataFromStorage();
   } 
 
-  ionViewDidAppear() {
-    console.log("ppppp");
-  }
-
-  ngOnInit()
-  {
-    console.log("ng");
+  ngOnInit() {
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
   }
@@ -124,7 +123,7 @@ export class HomePage implements OnInit {
          this.myInput = "";
           this.getDataFromStorage();
        }
-    }
+  }
 
   //get data from storage on keypress
   onInput()
@@ -240,25 +239,15 @@ export class HomePage implements OnInit {
     });
   } 
 
-  // presentPopover(myEvent) {
-  //   let popover = this.popoverCtrl.create(SettingPage);
-  //   popover.present({
-  //     ev: myEvent
-  //   });
-
-  //   console.log('popover');
-  // }
-
+  //open popover
   presentPopover(ev) {
-
     let popover = this.popoverCtrl.create(SettingPage, {
-      contentEle: this.content.nativeElement,     
-      // textEle: this.text.nativeElement
+      contentEle: this.content.nativeElement,  
+      imageEle: this.bottomImage.nativeElement   
     });
     popover.present({
       ev: ev
     });
-    console.log('in');
   }
   
 }

@@ -8,11 +8,10 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
 })
 export class SettingPage {
 
-  // background: string;
   contentEle: any;
-  // textEle: any;
-  fontFamily: 'Arial';
-  // fontsize;
+  imageEle: any;
+  fontFamily;
+  default: boolean;
 
   colors = {
     'white': {
@@ -23,12 +22,12 @@ export class SettingPage {
       'bg': 'rgb(249, 241, 228)',
       'fg': 'rgb(0, 0, 0)'
     },
-    'grey': {
-      'bg': 'rgb(76, 75, 80)',
+    'blue': {
+      'bg': 'rgb(214, 234, 248)',
       'fg': 'rgb(255, 255, 255)'
     },
-    'black': {
-      'bg': 'rgb(0, 0, 0)',
+    'gray': {
+      'bg': 'rgb(213, 219, 219)',
       'fg': 'rgb(255, 255, 255)'
     },
   };
@@ -45,57 +44,80 @@ export class SettingPage {
     this.viewCtrl.dismiss();
   }
 
+  ionViewDidEnter() {
+    console.log('ionViewDidLoad HomePage');
+
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      if(val==='Default') {
+        this.default = true;
+      }
+      else {
+        this.default = false;
+      }
+    })
+  } 
+
   ngOnInit() {
     if (this.navParams.data) {
       this.contentEle = this.navParams.data.contentEle;
-      // this.contentEle = SettingPage;
-      // this.textEle = this.navParams.data.textEle;
+      this.imageEle = this.navParams.data.imageEle;
       console.log(this.contentEle);
-      //console.log(this.textEle);
-      //this.background = this.getColorName(this.contentEle.style.backgroundColor);
+      console.log(this.imageEle);
       
-      this.setFontFamily();
+      // this.setFontFamily();
     }
   }
 
-  getColorName(background) {
-    let colorName = 'white';
+  // getColorName(background) {
+  //   let colorName = 'white';
 
-    if (!background) return 'white';
+  //   if (!background) return 'white';
 
-    for (var key in this.colors) {
-      if (this.colors[key].bg == background) {
-        colorName = key;
-      }
-    }
+  //   for (var key in this.colors) {
+  //     if (this.colors[key].bg == background) {
+  //       colorName = key;
+  //     }
+  //   }
 
-    return colorName;
-  }
+  //   return colorName;
+  // }
 
-  setFontFamily() {
-    // if (this.textEle.style.fontFamily) {
-    //   this.fontFamily = this.textEle.style.fontFamily.replace(/'/g, "");
-    // }
-  }
+  // setFontFamily() {
+  //   // if (this.textEle.style.fontFamily) {
+  //   //   this.fontFamily = this.textEle.style.fontFamily.replace(/'/g, "");
+  //   // }
+  // }
 
   changeBackground(imageurl) {
-    // this.background = color;
-    // this.contentEle.style.backgroundColor = this.colors[color].bg;
-    this.contentEle.style.backgroundImage = 'url('+imageurl+')';
+    console.log(imageurl);
+    if(imageurl==="Default") {
+      this.imageEle.src = '';
+    } 
+    else {
+      this.default = false;
+      this.imageEle.src = imageurl;
+    }
     this.setBackgroundProvider.setBackground(imageurl);
-    //this.textEle.style.color = this.colors[color].fg;
   }
 
-  changeFontSize(direction) {
-    // this.fontsize = '10px';
-    // this.textEle.style.fontSize = direction;
-    // this.contentEle.style.fontSize = direction;
+  changeBackgroundColor(color) {
+    console.log(color);
+    this.contentEle.style.backgroundColor = this.colors[color].bg;
+    let bcolor = this.colors[color].bg;
+    console.log(bcolor);
+    this.setBackgroundProvider.setBackgroundColor(bcolor);
   }
+
+  // changeFontSize(direction) {
+  //   // this.fontsize = '10px';
+  //   // this.textEle.style.fontSize = direction;
+  //   // this.contentEle.style.fontSize = direction;
+  // }
 
   changeFontFamily(fonttype) {
     console.log(fonttype);
     this.fontFamily = fonttype;
-    // if (this.fontFamily) this.textEle.style.fontFamily = this.fontFamily;
+    this.contentEle.style.fontFamily = fonttype;
   }
 
 }

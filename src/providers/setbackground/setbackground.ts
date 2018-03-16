@@ -5,8 +5,8 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class SetbackgroundProvider {
 
-  imageurl: string;
   BACKGROUND_KEY = 'image_url';
+  BCOLOR_KEY = 'bcolor';
 
   constructor(public storage :Storage) {}
   
@@ -16,9 +16,18 @@ export class SetbackgroundProvider {
 
   getBackground() {
     return this.storage.get(this.BACKGROUND_KEY).then((val) => {
-      // this.imageurl = val;
       return val;
     });   
+  }
+
+  setBackgroundColor(bcolor) {
+    this.storage.set(this.BCOLOR_KEY, bcolor);
+  }
+
+  getBackgroundColor() {
+    return this.storage.get(this.BCOLOR_KEY).then((val) => {
+      return val;
+    }); 
   }
 
 }
