@@ -10,8 +10,12 @@ export class SettingPage {
 
   contentEle: any;
   imageEle: any;
+  textEle: any;
+
   default: boolean;
-  fontFamily = '';
+  font = '';
+  imageurl: any;
+  bgcolor: any;
 
   colors = {
     'white': {
@@ -51,23 +55,42 @@ export class SettingPage {
       }
       else {
         this.default = false;
+        this.imageurl = val;
+        console.log(this.imageurl);
+      }
+    });
+
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      if(this.colors.white.bg === val) {
+        this.bgcolor = 'white';
+      }
+      if(this.colors.tan.bg === val) {
+        this.bgcolor = 'tan';
+      }
+      if(this.colors.blue.bg === val) {
+        this.bgcolor = 'blue';
+      }
+      if(this.colors.gray.bg === val) {
+        this.bgcolor = 'gray';
       }
     });
 
     this.setBackgroundProvider.getFontType().then((val)=>{
-      this.fontFamily = val;
-    })
+      this.font = val;
+    });
   } 
 
   ngOnInit() {
     if (this.navParams.data) {
       this.contentEle = this.navParams.data.contentEle;
       this.imageEle = this.navParams.data.imageEle;
+      this.textEle = this.navParams.data.textEle;
     }
   }
 
   changeBackground(imageurl) {
-    console.log(imageurl);
+    this.imageurl = imageurl;
+
     if(imageurl==="Default") {
       this.imageEle.src = '';
     } 
@@ -79,13 +102,15 @@ export class SettingPage {
   }
 
   changeBackgroundColor(color) {
+    this.bgcolor = color;
     this.contentEle.style.backgroundColor = this.colors[color].bg;
+
     let bcolor = this.colors[color].bg;
     this.setBackgroundProvider.setBackgroundColor(bcolor);
   }
 
   changeFontFamily(fonttype) {
-    this.contentEle.style.fontFamily = fonttype;
+    this.textEle.style.fontFamily = fonttype;
     this.setBackgroundProvider.setFontType(fonttype);
   }
 

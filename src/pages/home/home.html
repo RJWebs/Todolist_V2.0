@@ -43,7 +43,8 @@
    <button ion-fab [navPush]="addtaskPage"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
-  <div *ngFor='let item of todoList; let i=index' style="opacity:0.9" [style.fontFamily]='fontFamily'>
+  <div #popoverText [style.fontFamily]='fontFamily'>
+  <div *ngFor='let item of todoList; let i=index' style="opacity:0.9">
     <div (click)="selectTask(i)">
       <ion-card>
 
@@ -127,7 +128,8 @@
       </ion-card>
     </div>
   </div>
-  
+  </div>
+
   <div style="z-index:-1; width:40%; height:auto; position:absolute; bottom:15%; border:0px solid black; margin-left:30%; margin-right:30%">
     <img #popoverImage src="{{imageurl}}" style="width:100%; height:auto; position:absolute; bottom:0px">
   </div>

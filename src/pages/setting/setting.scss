@@ -55,9 +55,8 @@
     background-color: rgb(213, 219, 219);
   }
 
-  .dot.selected {
-    border-width: 2px;
-    border-color: #327eff;
+  .selected {
+    border: 2px solid #327eff;
   }
 
   .text-arial {

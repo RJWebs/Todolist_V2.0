@@ -19,45 +19,45 @@
 
       <ion-row class="row-dots">
         <ion-col>
-          <button ion-button="dot" (click)="changeBackgroundColor('white')" class="dot-white" [class.selected]="background == 'white'"></button>
+          <button ion-button="dot" (click)="changeBackgroundColor('white')" class="dot-white" [class.selected]="bgcolor==='white'"></button>
         </ion-col>
         <ion-col>
-          <button ion-button="dot" (click)="changeBackgroundColor('tan')" class="dot-tan" [class.selected]="background == 'tan'"></button>
+          <button ion-button="dot" (click)="changeBackgroundColor('tan')" class="dot-tan" [class.selected]="bgcolor==='tan'"></button>
         </ion-col>
         <ion-col>
-          <button ion-button="dot" (click)="changeBackgroundColor('blue')" class="dot-blue" [class.selected]="background == 'blue'"></button>
+          <button ion-button="dot" (click)="changeBackgroundColor('blue')" class="dot-blue" [class.selected]="bgcolor==='blue'"></button>
         </ion-col>
         <ion-col>
-          <button ion-button="dot" (click)="changeBackgroundColor('gray')" class="dot-gray" [class.selected]="background === 'gray'"></button>
+          <button ion-button="dot" (click)="changeBackgroundColor('gray')" class="dot-gray" [class.selected]="bgcolor==='gray'"></button>
         </ion-col>
       </ion-row>
 
-      <ion-row class="row-dots">
+      <ion-row>
         <ion-col col-3>
-          <ion-item>
+          <ion-item style="padding:0px">
             <ion-avatar (click)="changeBackground('../../assets/imgs/girl.png')">
-              <img src="../../assets/imgs/girl.png">
+              <img src="../../assets/imgs/girl.png" style="margin-left:6px" [class.selected]="imageurl==='../../assets/imgs/girl.png'">
             </ion-avatar>
           </ion-item>
         </ion-col>
         <ion-col col-3>
-          <ion-item>
+          <ion-item style="padding:0px">
             <ion-avatar (click)="changeBackground('../../assets/imgs/bear.png')">
-              <img src="../../assets/imgs/bear.png">
+              <img src="../../assets/imgs/bear.png" style="margin-left:6px" [class.selected]="imageurl==='../../assets/imgs/bear.png'">
             </ion-avatar>
           </ion-item>
         </ion-col>
         <ion-col col-3>
-          <ion-item>
+          <ion-item style="padding:0px">
             <ion-avatar (click)="changeBackground('../../assets/imgs/heart_rain.png')">
-              <img src="../../assets/imgs/heart_rain.png">
+              <img src="../../assets/imgs/heart_rain.png" style="margin-left:6px" [class.selected]="imageurl==='../../assets/imgs/heart_rain.png'">
             </ion-avatar>
           </ion-item>
         </ion-col>
         <ion-col col-3>
-          <ion-item>
+          <ion-item style="padding:0px">
             <ion-avatar (click)="changeBackground('../../assets/imgs/flower.png')">
-              <img src="../../assets/imgs/flower.png">
+              <img src="../../assets/imgs/flower.png" style="margin-left:6px" [class.selected]="imageurl==='../../assets/imgs/flower.png'">
             </ion-avatar>
           </ion-item>
         </ion-col>
@@ -74,30 +74,30 @@
       </ion-list-header>
       <ion-item>
         <ion-label>Default</ion-label>
-        <ion-radio value="" [checked]="fontFamily===''"></ion-radio>
+        <ion-radio value="" [checked]="font===''"></ion-radio>
       </ion-item>
       <ion-item class="text-arial">
         <ion-label>Arial</ion-label>
-        <ion-radio value="Arial" [checked]="fontFamily==='Arial'"></ion-radio>
+        <ion-radio value="Arial" [checked]="font==='Arial'"></ion-radio>
       </ion-item>
       <ion-item class="text-calibri">
         <ion-label>Calibri</ion-label>
-        <ion-radio value="Calibri" [checked]="fontFamily==='Calibri'"></ion-radio>
+        <ion-radio value="Calibri" [checked]="font==='Calibri'"></ion-radio>
       </ion-item>
       <ion-item class="text-courier">
         <ion-label>Courier New</ion-label>
-        <ion-radio value="Courier New" [checked]="fontFamily==='Courier New'"></ion-radio>
+        <ion-radio value="Courier New" [checked]="font==='Courier New'"></ion-radio>
       </ion-item>
       <ion-item class="text-century">
         <ion-label>Century</ion-label>
-        <ion-radio value="Century" [checked]="fontFamily==='Century'"></ion-radio>
+        <ion-radio value="Century" [checked]="font==='Century'"></ion-radio>
       </ion-item>
       <ion-item class="text-lucida">
         <ion-label>Lucida Handwriting</ion-label>
-        <ion-radio value="Lucida Handwriting" [checked]="fontFamily==='Lucida Handwriting'"></ion-radio>
+        <ion-radio value="Lucida Handwriting" [checked]="font==='Lucida Handwriting'"></ion-radio>
       </ion-item>
       <ion-item class="text-times-new-roman">
         <ion-label>Times New Roman</ion-label>
-        <ion-radio value="Times New Roman" [checked]="fontFamily==='Times New Roman'"></ion-radio>
+        <ion-radio value="Times New Roman" [checked]="font==='Times New Roman'"></ion-radio>
       </ion-item>
     </ion-list>

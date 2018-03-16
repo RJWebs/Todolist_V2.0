@@ -84,7 +84,7 @@ export class AddtaskPage {
       }
 
       // this.navCtrl.push(this.tabsPage);
-      this.navCtrl.popToRoot()
+      this.navCtrl.popToRoot();
     });
   }
 

@@ -18,8 +18,7 @@ export class HomePage implements OnInit {
 
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
-  // @ViewChild( 'content')content: Content;
-      // @ViewChild('content') content: ElementRef;
+  @ViewChild( 'popoverText') text: ElementRef;
 
   public toggled: boolean = false;
   myInput : string = "";
@@ -41,7 +40,7 @@ export class HomePage implements OnInit {
 
   imageurl: any;
   backgroundcolor: any;
-  fontFamily = '';
+  fontFamily;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
@@ -249,7 +248,8 @@ export class HomePage implements OnInit {
   presentPopover(ev) {
     let popover = this.popoverCtrl.create(SettingPage, {
       contentEle: this.content.nativeElement,  
-      imageEle: this.bottomImage.nativeElement   
+      imageEle: this.bottomImage.nativeElement,
+      textEle: this.text.nativeElement  
     });
     popover.present({
       ev: ev
