@@ -1,17 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      <span style="color:white">Contact Us</span>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content [style.backgroundImage]='imageurl'>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+<ion-content [style.backgroundColor]='backgroundcolor'>
+  <div style="background-color:white; opacity:0.9" [style.fontFamily]='fontFamily'>
+    <ion-list>
+      <ion-list-header>Follow us on Twitter</ion-list-header>
+      <ion-item>
+        <ion-icon name="ionic" item-start></ion-icon>
+        @ionicframework
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div style="z-index:-1; width:40%; height:auto; position:absolute; bottom:15%; border:0px solid black; margin-left:30%; margin-right:30%">
+    <img src="{{imageurl}}" style="width:100%; height:auto; position:absolute; bottom:0px">
+  </div>
 </ion-content>

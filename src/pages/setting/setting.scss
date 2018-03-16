@@ -47,41 +47,36 @@
     background-color: rgb(249,241,228);
   }
 
-  .dot-grey {
-    background-color: rgb(76,75,80);
+  .dot-blue {
+    background-color: rgb(214, 234, 248);
   }
 
-  .dot-black {
-    background-color: rgb(0,0,0);
+  .dot-gray {
+    background-color: rgb(213, 219, 219);
   }
 
-  .dot.selected {
-    border-width: 2px;
-    border-color: #327eff;
+  .selected {
+    border: 2px solid #327eff;
   }
 
-  .text-athelas {
-    font-family: "Athelas";
+  .text-arial {
+    font-family: "Arial";
   }
 
-  .text-charter {
-    font-family: "Charter";
+  .text-calibri {
+    font-family: "Calibri";
   }
 
-  .text-iowan {
-    font-family: "Iowan";
+  .text-courier {
+    font-family: "Courier New";
   }
 
-  .text-palatino {
-    font-family: "Palatino";
+  .text-century {
+    font-family: "Century";
   }
 
-  .text-san-francisco {
-    font-family: "San Francisco";
-  }
-
-  .text-seravek {
-    font-family: "Seravek";
+  .text-san-lucida {
+    font-family: "Lucida Handwriting";
   }
 
   .text-times-new-roman {

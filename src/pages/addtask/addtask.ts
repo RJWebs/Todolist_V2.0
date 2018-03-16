@@ -28,6 +28,8 @@ export class AddtaskPage {
   STORAGE_KEY = 'todo_item';
 
   imageurl: any;
+  backgroundcolor: any;
+  fontFamily = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
               public setBackgroundProvider: SetbackgroundProvider) {
@@ -38,12 +40,22 @@ export class AddtaskPage {
   }
 
   ionViewDidEnter() {
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
     });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
+    });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
+    });
+
   }
 
   //add data into storage
@@ -62,7 +74,7 @@ export class AddtaskPage {
 
         this.todolist.push(this.todo);
         console.log('after push: ' +this.todolist);
-        // this.todolist = [];
+        //this.todolist = [];
         this.storage.set(this.STORAGE_KEY, this.todolist);
         console.log(this.todolist);
 
@@ -72,7 +84,7 @@ export class AddtaskPage {
       }
 
       // this.navCtrl.push(this.tabsPage);
-      this.navCtrl.popToRoot()
+      this.navCtrl.popToRoot();
     });
   }
 

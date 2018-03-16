@@ -23,6 +23,9 @@ export class HomePage implements OnInit {
       // @ViewChild('content') content: ElementRef;
   sortDate : any;
   sortDateLable : any = "";
+  @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
+  @ViewChild( 'popoverText') text: ElementRef;
+
   public toggled: boolean = false;
   myInput : string = "";
 
@@ -42,6 +45,8 @@ export class HomePage implements OnInit {
   selectedTask = null;
 
   imageurl: any;
+  backgroundcolor: any;
+  fontFamily;
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
@@ -64,11 +69,20 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
 
+    //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
-      this.imageurl = 'url('+val+')';
-      console.log(val);
-    }).catch(error=>{
-      //handle error
+      this.imageurl = val;
+      console.log(this.imageurl);
+    });
+
+    //get background color from storage
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      this.backgroundcolor = val;
+    });
+
+    //get fontface from storage
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.fontFamily = val;
     });
 
     //get data from storage and display
@@ -79,14 +93,12 @@ export class HomePage implements OnInit {
     console.log("ppppp");
   }
 
-  ngOnInit()
-  {
 
-
-    console.log("ng");
+    
+  ngOnInit() {
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
-
+    console.log("ng");
   }
 
   //select task and get id
@@ -131,7 +143,7 @@ export class HomePage implements OnInit {
          this.myInput = "";
           this.getDataFromStorage();
        }
-    }
+  }
 
   //get data from storage on keypress
   onInput()
@@ -266,25 +278,16 @@ export class HomePage implements OnInit {
     });
   } 
 
-  // presentPopover(myEvent) {
-  //   let popover = this.popoverCtrl.create(SettingPage);
-  //   popover.present({
-  //     ev: myEvent
-  //   });
-
-  //   console.log('popover');
-  // }
-
+  //open popover
   presentPopover(ev) {
-
     let popover = this.popoverCtrl.create(SettingPage, {
-      contentEle: this.content.nativeElement,     
-      // textEle: this.text.nativeElement
+      contentEle: this.content.nativeElement,  
+      imageEle: this.bottomImage.nativeElement,
+      textEle: this.text.nativeElement  
     });
     popover.present({
       ev: ev
     });
-    console.log('in');
   }
 
   getSortDateFromService()
@@ -293,7 +296,4 @@ export class HomePage implements OnInit {
     this.sortDateLable = this.taskservice.getSortDateLable();
     console.log(this.sortDateLable);
   }
-  
-
-  
 }

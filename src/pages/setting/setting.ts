@@ -18,9 +18,13 @@ export class SettingPage {
   STORAGE_KEY = 'todo_item';
   // background: string;
   contentEle: any;
-  // textEle: any;
-  fontFamily: 'Arial';
-  // fontsize;
+  imageEle: any;
+  textEle: any;
+
+  default: boolean;
+  font = '';
+  imageurl: any;
+  bgcolor: any;
 
   colors = {
     'white': {
@@ -31,12 +35,12 @@ export class SettingPage {
       'bg': 'rgb(249, 241, 228)',
       'fg': 'rgb(0, 0, 0)'
     },
-    'grey': {
-      'bg': 'rgb(76, 75, 80)',
+    'blue': {
+      'bg': 'rgb(214, 234, 248)',
       'fg': 'rgb(255, 255, 255)'
     },
-    'black': {
-      'bg': 'rgb(0, 0, 0)',
+    'gray': {
+      'bg': 'rgb(213, 219, 219)',
       'fg': 'rgb(255, 255, 255)'
     },
   };
@@ -54,57 +58,70 @@ export class SettingPage {
     this.viewCtrl.dismiss();
   }
 
+  ionViewDidEnter() {
+    this.setBackgroundProvider.getBackground().then((val)=>{
+      if(val==='Default') {
+        this.default = true;
+      }
+      else {
+        this.default = false;
+        this.imageurl = val;
+        console.log(this.imageurl);
+      }
+    });
+
+    this.setBackgroundProvider.getBackgroundColor().then((val)=>{
+      if(this.colors.white.bg === val) {
+        this.bgcolor = 'white';
+      }
+      if(this.colors.tan.bg === val) {
+        this.bgcolor = 'tan';
+      }
+      if(this.colors.blue.bg === val) {
+        this.bgcolor = 'blue';
+      }
+      if(this.colors.gray.bg === val) {
+        this.bgcolor = 'gray';
+      }
+    });
+
+    this.setBackgroundProvider.getFontType().then((val)=>{
+      this.font = val;
+    });
+  } 
+
   ngOnInit() {
     if (this.navParams.data) {
       this.contentEle = this.navParams.data.contentEle;
-      // this.contentEle = SettingPage;
-      // this.textEle = this.navParams.data.textEle;
-      console.log(this.contentEle);
-      //console.log(this.textEle);
-      //this.background = this.getColorName(this.contentEle.style.backgroundColor);
-      
-      this.setFontFamily();
+      this.imageEle = this.navParams.data.imageEle;
+      this.textEle = this.navParams.data.textEle;
     }
-  }
-
-  getColorName(background) {
-    let colorName = 'white';
-
-    if (!background) return 'white';
-
-    for (var key in this.colors) {
-      if (this.colors[key].bg == background) {
-        colorName = key;
-      }
-    }
-
-    return colorName;
-  }
-
-  setFontFamily() {
-    // if (this.textEle.style.fontFamily) {
-    //   this.fontFamily = this.textEle.style.fontFamily.replace(/'/g, "");
-    // }
   }
 
   changeBackground(imageurl) {
-    // this.background = color;
-    // this.contentEle.style.backgroundColor = this.colors[color].bg;
-    this.contentEle.style.backgroundImage = 'url('+imageurl+')';
+    this.imageurl = imageurl;
+
+    if(imageurl==="Default") {
+      this.imageEle.src = '';
+    } 
+    else {
+      this.default = false;
+      this.imageEle.src = imageurl;
+    }
     this.setBackgroundProvider.setBackground(imageurl);
-    //this.textEle.style.color = this.colors[color].fg;
   }
 
-  changeFontSize(direction) {
-    // this.fontsize = '10px';
-    // this.textEle.style.fontSize = direction;
-    // this.contentEle.style.fontSize = direction;
+  changeBackgroundColor(color) {
+    this.bgcolor = color;
+    this.contentEle.style.backgroundColor = this.colors[color].bg;
+
+    let bcolor = this.colors[color].bg;
+    this.setBackgroundProvider.setBackgroundColor(bcolor);
   }
 
   changeFontFamily(fonttype) {
-    console.log(fonttype);
-    this.fontFamily = fonttype;
-    // if (this.fontFamily) this.textEle.style.fontFamily = this.fontFamily;
+    this.textEle.style.fontFamily = fonttype;
+    this.setBackgroundProvider.setFontType(fonttype);
   }
 
   sortByDate(date = new Date)
