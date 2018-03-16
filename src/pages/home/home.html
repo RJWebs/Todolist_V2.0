@@ -42,7 +42,9 @@
   <ion-fab bottom right>
    <button ion-fab [navPush]="addtaskPage"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-
+    <ion-row>
+        <ion-col><ion-badge item-end color="secondary">{{sortDateLable}}</ion-badge></ion-col>
+    </ion-row>
   <div *ngFor='let item of todoList; let i=index' style="opacity:0.9" >
     <div (click)="selectTask(i)">
       <ion-card>
@@ -63,8 +65,9 @@
               <button ion-button small style="background-color:#CF28F8; color:white; height:34px" *ngIf="item.tasktype==='Office'"><ion-icon name="briefcase"></ion-icon></button>
               <button ion-button small style="background-color:#14CFE5; color:white; height:34px" *ngIf="item.tasktype===''"><ion-icon name="clipboard"></ion-icon></button>
             </ion-col>
-
+  
             <ion-col col-11>
+                  
               <ion-card-header>      
                 <ion-grid>
                   <ion-row>

@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
+import { Storage } from '@ionic/storage';
+import { DatePipe } from '@angular/common';
+import {TaskserviceProvider} from '../../providers/taskservice/taskservice';
+import {TabsPage} from '../tabs/tabs';
+import { App } from 'ionic-angular';
 
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html',
 })
 export class SettingPage {
+  //rootPage:any = TabsPage;
 
+  myDate : any = new Date;
+  STORAGE_KEY = 'todo_item';
   // background: string;
   contentEle: any;
   // textEle: any;
@@ -34,7 +42,8 @@ export class SettingPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              public setBackgroundProvider: SetbackgroundProvider) {
+              public setBackgroundProvider: SetbackgroundProvider,public storage: Storage,
+              private datePipe: DatePipe,private taskservice : TaskserviceProvider,public app: App) {
   }
 
   ionViewDidLoad() {
@@ -98,4 +107,37 @@ export class SettingPage {
     // if (this.fontFamily) this.textEle.style.fontFamily = this.fontFamily;
   }
 
+  sortByDate(date = new Date)
+  {
+    this.getDataFromStorageByDate(this.datePipe.transform(date, 'yyyy-MM-dd'));
+    
+    this.viewCtrl.dismiss().then(() => {
+      this.app.getRootNav().push(TabsPage);
+    });
+
+  }
+
+   getDataFromStorageByDate(date : any)
+  {
+      this.taskservice.setSortDate(date); 
+  }
+
+  sortByDateAll()
+  {
+    this.taskservice.setSortDateAll();
+
+    this.viewCtrl.dismiss().then(() => {
+      this.app.getRootNav().push(TabsPage);
+    });
+  }
+  sortByDateSelect()
+  {
+    console.log(this.myDate);
+    this.taskservice.setSortDate(this.myDate);
+
+    this.viewCtrl.dismiss().then(() => {
+      this.app.getRootNav().push(TabsPage);
+    });  
+
+  }
 }

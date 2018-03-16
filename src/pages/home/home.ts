@@ -9,6 +9,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
 // import { Content } from "ionic-angular/navigation/nav-interfaces";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
+//import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'page-home',
@@ -20,7 +21,8 @@ export class HomePage implements OnInit {
   // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
   // @ViewChild( 'content')content: Content;
       // @ViewChild('content') content: ElementRef;
-
+  sortDate : any;
+  sortDateLable : any = "";
   public toggled: boolean = false;
   myInput : string = "";
 
@@ -54,6 +56,8 @@ export class HomePage implements OnInit {
                     data: { mydata: 'My hidden message this is' },
                     at: new Date(new Date().getTime() + 2 * 1000)
                               });
+                
+                //  this.storage.set("sortdate","");
 
   }
 
@@ -77,9 +81,12 @@ export class HomePage implements OnInit {
 
   ngOnInit()
   {
+
+
     console.log("ng");
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
+
   }
 
   //select task and get id
@@ -136,6 +143,7 @@ export class HomePage implements OnInit {
   //function to get data from storage
   getDataFromStorage()
   {
+    this.getSortDateFromService();
     if(this.myInput == "" || this.myInput == null)
     {
       this.storage.get(this.STORAGE_KEY).then(result => {
@@ -144,12 +152,30 @@ export class HomePage implements OnInit {
       if(result) {
         result.forEach(element => {
           console.log(this.listType);
+          console.log(this.sortDate);
           if(this.listType === "" || this.listType === "All Lists") {
+            
+            if((this.sortDate === element.startdate) && (this.sortDate != ""))
+            {
             this.todoList.push(element);
+            }
+            if(this.sortDate == "" || this.sortDate == null)
+            {
+              this.todoList.push(element);
+            }
+    
           } 
           else {
             if(element.tasktype === this.listType) {
+               if((this.sortDate === element.startdate) && (this.sortDate != ""))
+              {
+                this.todoList.push(element);
+              }
+              if(this.sortDate == "" || this.sortDate == null)
+              {
               this.todoList.push(element);
+              }
+              
             }
           }        
         })
@@ -260,5 +286,14 @@ export class HomePage implements OnInit {
     });
     console.log('in');
   }
+
+  getSortDateFromService()
+  {
+    this.sortDate = this.taskservice.getSortDate();
+    this.sortDateLable = this.taskservice.getSortDateLable();
+    console.log(this.sortDateLable);
+  }
+  
+
   
 }

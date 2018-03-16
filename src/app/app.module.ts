@@ -19,6 +19,7 @@ import { FinishtaskPage } from "../pages/finishtask/finishtask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../pages/setting/setting";
 import { SetbackgroundProvider } from '../providers/setbackground/setbackground';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SetbackgroundProvider } from '../providers/setbackground/setbackground'
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TaskserviceProvider,
     LocalNotifications,
-    SetbackgroundProvider
+    SetbackgroundProvider,
+    DatePipe
   ]
 })
 export class AppModule {}

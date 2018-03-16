@@ -9,6 +9,24 @@
 
 <ion-list radio-group [(ngModel)]="ChangeFontTypeTo" (ionChange)="changeFontFamily($event)" class="popover-page">
       <ion-row>
+        <ion-list-header>
+        Sort By
+        </ion-list-header>
+        <ion-col>
+          <button ion-button (click)="sortByDate()">Today</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button (click)="sortByDateAll()" color="danger">All</button>
+        </ion-col>
+        <ion-col>
+        <button ion-button color="secondary" >Date
+          <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="myDate" (ionChange)="sortByDateSelect()">
+          </ion-datetime>
+        </button>
+            
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col>
           <button (click)="changeFontSize('smaller')" ion-item detail-none class="text-button text-smaller">A</button>
         </ion-col>

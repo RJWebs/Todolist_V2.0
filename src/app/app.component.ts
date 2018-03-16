@@ -9,6 +9,7 @@ import { MenuController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import {TaskserviceProvider} from '../providers/taskservice/taskservice';
 import { FinishtaskPage } from "../pages/finishtask/finishtask";
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,13 +20,16 @@ export class MyApp {
   @ViewChild('content') nav: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, 
-  splashScreen: SplashScreen,public menu: MenuController,public taskservice:TaskserviceProvider) {
+  splashScreen: SplashScreen,public menu: MenuController,public taskservice:TaskserviceProvider,public storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    
+
   }
 
    selectList(listname : any)
