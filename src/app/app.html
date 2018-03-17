@@ -6,34 +6,46 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item (click)="selectList('All Lists')">
-        <ion-icon name="home" style="color:#488aff; margin-right:5px"></ion-icon>
-        All Lists
-      </button>
-      <button ion-item (click)="selectList('Personal')">
-        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
-        Personal
-      </button>
-      <button ion-item (click)="selectList('Office')">
-        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
-        Office
-      </button>
-      <button ion-item (click)="selectList('Wishlist')">
-        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
-        Wishlist
-      </button>
-      <button ion-item (click)="selectList('Shopping')">
-        <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
-        Shopping
-      </button>
-      <button ion-item (click)="selectFinishedList()">
-        <ion-icon name="checkmark" style="color:#488aff; margin-right:5px"></ion-icon>
-        Completed Tasks
-      </button>
-      <button ion-item (click)="closeMenu()">
-        <ion-icon name="close-circle" style="color:#488aff; margin-right:5px"></ion-icon>
-        Close Menu
-      </button>
+        <button ion-item (click)="selectList('All Lists')">
+          <ion-icon name="home" style="color:#488aff; margin-right:5px"></ion-icon>
+          All Lists
+          <ion-badge item-end *ngIf="allList != 0">{{allList}}</ion-badge>
+        </button>
+
+        <button ion-item (click)="selectList('Personal')">
+          <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+          Personal
+          <ion-badge item-end *ngIf="personal != 0">{{personal}}</ion-badge>
+        </button>
+        
+        <button ion-item (click)="selectList('Office')">
+          <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+          Office
+          <ion-badge item-end *ngIf="office != 0">{{office}}</ion-badge>
+        </button>
+
+        <button ion-item (click)="selectList('Wishlist')">
+          <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+          Wishlist
+          <ion-badge item-end *ngIf="wishlist != 0">{{wishlist}}</ion-badge>
+        </button>
+
+        <button ion-item (click)="selectList('Shopping')">
+          <ion-icon name="list" style="color:#488aff; margin-right:5px"></ion-icon>
+          Shopping
+          <ion-badge item-end *ngIf="shopping != 0">{{shopping}}</ion-badge>
+        </button>
+
+        <button ion-item (click)="selectFinishedList()">
+          <ion-icon name="checkbox-outline" style="color:#488aff; margin-right:5px"></ion-icon>
+          Completed Tasks
+          <ion-badge item-end *ngIf="finishedtask != 0">{{finishedtask}}</ion-badge>
+        </button>
+        
+        <button ion-item (click)="closeMenu()">
+          <ion-icon name="close-circle" style="color:#488aff; margin-right:5px"></ion-icon>
+          Close Menu
+        </button>
     </ion-list>
   </ion-content>
 </ion-menu>

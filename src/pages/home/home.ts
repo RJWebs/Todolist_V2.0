@@ -7,9 +7,7 @@ import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
-// import { Content } from "ionic-angular/navigation/nav-interfaces";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
-//import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'page-home',
@@ -18,13 +16,10 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
 export class HomePage implements OnInit {
 
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
-  // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
-  // @ViewChild( 'content')content: Content;
-      // @ViewChild('content') content: ElementRef;
-  sortDate : any;
-  sortDateLable : any = "";
   @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
   @ViewChild( 'popoverText') text: ElementRef;
+  sortDate : any;
+  sortDateLable : any = "";
 
   public toggled: boolean = false;
   myInput : string = "";
@@ -60,10 +55,7 @@ export class HomePage implements OnInit {
                     text: 'Simons Notification',
                     data: { mydata: 'My hidden message this is' },
                     at: new Date(new Date().getTime() + 2 * 1000)
-                              });
-                
-                //  this.storage.set("sortdate","");
-
+                });
   }
 
   ionViewDidEnter() {
@@ -89,12 +81,6 @@ export class HomePage implements OnInit {
     this.getDataFromStorage();
   } 
 
-  ionViewDidAppear() {
-    console.log("ppppp");
-  }
-
-
-    
   ngOnInit() {
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
