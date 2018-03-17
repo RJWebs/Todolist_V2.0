@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams } from 'ionic-angular';
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
@@ -7,7 +7,7 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
   selector: 'page-updatetask',
   templateUrl: 'updatetask.html',
 })
-export class UpdatetaskPage {
+export class UpdatetaskPage implements OnInit {
 
   todo: any = {
     taskname: '',
@@ -19,6 +19,12 @@ export class UpdatetaskPage {
     taskstatus: '',
     important: ''
   };
+
+  today = new Date().toJSON();
+  enddateMin = new Date().toJSON();
+  endDate;
+  startDate = "";
+  disableEnddate: boolean = true;
 
   taskindex;
   todolist: any[] = [];
@@ -42,6 +48,17 @@ export class UpdatetaskPage {
     this.taskindex = navParams.data.taskindex;
   }
 
+  ngOnInit() {
+    //check startdate value to make enddate active
+    if(this.todo.startdate === "" || this.todo.startdate === null) {
+      console.log(this.todo.startdate);
+      this.disableEnddate = true;
+    }
+    else {
+      this.disableEnddate = false;
+    }
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdatetaskPage');
   }
@@ -63,6 +80,28 @@ export class UpdatetaskPage {
       this.fontFamily = val;
     });
 
+  }
+
+  //set minimum value of enddate
+  setMinDate(startdate) {
+    this.enddateMin = startdate;
+    this.startDate = startdate;
+    console.log(this.enddateMin);
+
+    this.disableEnddate = false;
+  }
+
+  //set enddate value
+  setendDate(enddate) {
+    this.endDate = enddate;
+    console.log(this.endDate);
+  }
+
+  //remove enddate when clicking startdate
+  resetValue() {
+    if(this.endDate != "" || this.endDate != null) {
+      this.todo.enddate = '';
+    }
   }
   
   //edit task

@@ -26,6 +26,7 @@ export class AddtaskPage {
 
   today = new Date().toJSON();
   enddateMin = new Date().toJSON();
+  endDate;
   disableEnddate: boolean = true;
 
   todolist: any [] = [];
@@ -62,11 +63,25 @@ export class AddtaskPage {
 
   }
 
+  //set minimum value of enddate
   setMinDate(startdate) {
     this.enddateMin = startdate;
     console.log(this.enddateMin);
 
     this.disableEnddate = false;
+  }
+
+  //set enddate value
+  setendDate(enddate) {
+    this.endDate = enddate;
+    console.log(this.endDate);
+  }
+
+  //remove enddate when clicking startdate
+  resetValue() {
+    if(this.endDate != "" || this.endDate != null) {
+      this.todo.enddate = '';
+    }
   }
 
   //add data into storage
