@@ -8,6 +8,7 @@ import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'page-home',
@@ -18,6 +19,9 @@ export class HomePage implements OnInit {
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
   @ViewChild( 'popoverText') text: ElementRef;
+
+  todayTaskCount : number = 0;
+  outDateTaskCount : number = 0;
   sortDate : any;
   sortDateLable : any = "";
 
@@ -45,17 +49,13 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
-              public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider) {
+              public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider,private datePipe: DatePipe) {
                 this.toggled = false;
 
+              this.getDataFromStorage();
 
-                this.localNotifications.schedule({
-                    id: 1,
-                    title: 'Attention',
-                    text: 'Simons Notification',
-                    data: { mydata: 'My hidden message this is' },
-                    at: new Date(new Date().getTime() + 2 * 1000)
-                });
+              this.showNotification();
+              
   }
 
   ionViewDidEnter() {
@@ -149,8 +149,8 @@ export class HomePage implements OnInit {
 
       if(result) {
         result.forEach(element => {
-          console.log(this.listType);
-          console.log(this.sortDate);
+          // console.log(this.listType);
+          // console.log(this.sortDate);
           if(this.listType === "" || this.listType === "All Lists") {
             
             if((this.sortDate === element.startdate) && (this.sortDate != ""))
@@ -281,4 +281,44 @@ export class HomePage implements OnInit {
     this.sortDateLable = this.taskservice.getSortDateLable();
     console.log(this.sortDateLable);
   }
+
+  showNotification()
+  {
+     this.storage.get(this.STORAGE_KEY).then(result => {
+
+     if(result) {
+        result.forEach(element => {
+        console.log(element.startdate+"ele");
+        console.log(this.datePipe.transform(new Date, 'yyyy-MM-dd')+"today");
+        if(element.startdate === this.datePipe.transform(new Date, 'yyyy-MM-dd'))
+        {
+          this.todayTaskCount += 1;
+          console.log(this.todayTaskCount+ "t");
+        }
+        else if(element.startdate < this.datePipe.transform(new Date, 'yyyy-MM-dd'))
+        {
+          this.outDateTaskCount += 1;
+          console.log(this.outDateTaskCount + "o");
+        }
+        })
+                }});
+
+    this.localNotifications.schedule({
+                    id: 1,
+                    title: 'Attention',
+                    text: 'Today you have ' + this.todayTaskCount + "tasks to do!",
+                    data: { mydata: 'My hidden message this is' },
+                    at: new Date(new Date().getTime() + 2 * 1000)
+                              });
+
+    this.localNotifications.schedule({
+                    id: 1,
+                    title: 'Attention',
+                    text: 'You have ' + this.outDateTaskCount + "tasks to do!",
+                    data: { mydata: 'My hidden message this is' },
+                    at: new Date(new Date().getTime() + 4 * 1000)
+                              });
+  }
+  
+
 }

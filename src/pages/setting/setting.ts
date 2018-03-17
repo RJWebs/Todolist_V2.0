@@ -60,7 +60,7 @@ export class SettingPage {
 
   ionViewDidEnter() {
     this.setBackgroundProvider.getBackground().then((val)=>{
-      if(val==='../../assets/imgs/defaultimage.jpg') {
+      if(val==='assets/imgs/defaultimage.jpg') {
         this.default = true;
       }
       else {

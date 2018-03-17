@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 //import { HomePage } from '../pages/home/home';
 import { MenuController } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import {TaskserviceProvider} from '../providers/taskservice/taskservice';
 import { FinishtaskPage } from "../pages/finishtask/finishtask";
 import { Storage } from '@ionic/storage';
@@ -32,16 +32,38 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, 
               splashScreen: SplashScreen,public menu: MenuController,public taskservice:TaskserviceProvider,
-              public storage: Storage) {
+              public storage: Storage, public events: Events) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+  //   events.subscribe('user:created', () => {
+  //     this.getBadgeData();
+  //   console.log('Welcome');
+  // });
   }
 
   ngOnInit() {
+    this.getBadgeData();
+  }
+
+  ionViewDidEnter() {
+    console.log("menu");
+    // this.getBadgeData();
+  }
+
+  //get data to display on menu badges
+  getBadgeData() {
+    this.allList = 0;
+    this.personal = 0;
+    this.office = 0;
+    this.wishlist = 0;
+    this.shopping = 0;
+    this.finishedtask = 0;
+
     this.storage.get(this.STORAGE_KEY).then(result => {
       if(result) {
         result.forEach(element => {
@@ -68,6 +90,7 @@ export class MyApp {
           this.finishedtask ++;
         });
       }
+      console.log(this.finishedtask);
     });
   }
 
