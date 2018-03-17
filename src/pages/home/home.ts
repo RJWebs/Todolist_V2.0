@@ -304,10 +304,9 @@ export class HomePage implements OnInit {
           this.outDateTaskCount += 1;
           console.log(this.outDateTaskCount + "o");
         }
-        })
-                }});
-
-    this.localNotifications.schedule({
+      })
+      
+       this.localNotifications.schedule({
                     id: 1,
                     title: 'Attention',
                     text: 'Today you have ' + this.todayTaskCount + "tasks to do!",
@@ -315,13 +314,17 @@ export class HomePage implements OnInit {
                     at: new Date(new Date().getTime() + 2 * 1000)
                               });
 
-    this.localNotifications.schedule({
+        this.localNotifications.schedule({
                     id: 1,
                     title: 'Attention',
                     text: 'You have ' + this.outDateTaskCount + "tasks to do!",
                     data: { mydata: 'My hidden message this is' },
                     at: new Date(new Date().getTime() + 4 * 1000)
-                              });
+                              }); 
+                }
+ 
+      });
+
   }
   
 
