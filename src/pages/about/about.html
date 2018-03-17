@@ -5,25 +5,62 @@
  </ion-navbar> 
 </ion-header>
 
-<ion-content padding [style.backgroundColor]='backgroundcolor'> 
-  <div style="background-color:white; opacity:0.9; padding-top:30px; padding-bottom:30px" [style.fontFamily]='fontFamily'>
-    <p>
-      This app helps you to keep track on your most important projects and day-to-day tasks. Todo-List helps you achieve more every day
-    </p>
+<ion-content [style.backgroundColor]='backgroundcolor'>
+  <div style="background-color:white; opacity:0.9" [style.fontFamily]='fontFamily'>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <div #imagediv>
+            <img src="assets/imgs/applogo.png">
+          </div>
+        </ion-col>
+        <ion-col col-8>
+          <h4>Todo-List</h4>
+          <hr>
+          <ion-icon name="star" style="color:#488aff"></ion-icon>
+          <ion-icon name="star" style="color:#488aff"></ion-icon>
+          <ion-icon name="star" style="color:#488aff"></ion-icon>
+          <ion-icon name="star" style="color:gray"></ion-icon>
+          <ion-icon name="star" style="color:gray"></ion-icon>          
+        </ion-col>
+      </ion-row>
 
-    <p>
-      Updated : 18th March, 2018
-      <br>
-      Version : 1.0
-      <br>
-      Size : 8.3 MB
-      <br>
-      Language : English
-    </p>
+      <ion-row>
+        <ion-col style="padding-left:10px">
+          <p>
+            This app helps you to keep track on your most important projects and day-to-day tasks. Todo-List helps you achieve more every day
+          </p>
+
+          <p>
+            <span style="color:blue"> Updated : </span> 18th March, 2018
+            <br>
+            <span style="color:blue"> Version : </span> 1.0
+            <br>
+            <span style="color:blue"> Size : </span> 8.3 MB
+            <br>
+            <span style="color:blue"> Language : </span> English
+          </p>
+        </ion-col>
+      </ion-row>
+
+      <!--<ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col col-8 style="text-align:center; padding-bottom:30px">
+          <h5>Rate app on app store</h5>
+          <h4>
+            <ion-icon name="star" [style.color]="color" (click)="changeColor()"></ion-icon>
+            <ion-icon name="star" [style.color]="color" (click)="changeColor()"></ion-icon>
+            <ion-icon name="star" [style.color]="color" (click)="changeColor()"></ion-icon>
+            <ion-icon name="star" [style.color]="color" (click)="changeColor()"></ion-icon>
+            <ion-icon name="star" [style.color]="color" (click)="changeColor()"></ion-icon>
+          </h4>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>-->
+    </ion-grid>
   </div>
 
   <div style="z-index:-1; width:40%; height:auto; position:absolute; bottom:15%; border:0px solid black; margin-left:30%; margin-right:30%">
     <img src="{{imageurl}}" style="width:100%; height:auto; position:absolute; bottom:0px">
   </div>
 </ion-content>
-

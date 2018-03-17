@@ -169,8 +169,7 @@ export class HomePage implements OnInit {
             if(this.sortDate == "" || this.sortDate == null)
             {
               this.todoList.push(element);
-            }
-    
+            }    
           } 
           else {
             if(element.tasktype === this.listType) {
