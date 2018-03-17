@@ -128,7 +128,7 @@ export class FinishtaskPage {
               this.storage.set(this.STORAGE_KEY, this.todoList);
 
             });
-            this.events.publish('user:created');
+            // this.events.publish('user:created');
             // this.navCtrl.setRoot(this.tabsPage);
  
             // this.navCtrl.popToRoot();

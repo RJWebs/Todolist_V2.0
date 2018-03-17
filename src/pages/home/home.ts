@@ -47,6 +47,8 @@ export class HomePage implements OnInit {
   backgroundcolor: any;
   fontFamily;
 
+  today;
+
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
               public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider,private datePipe: DatePipe) {
@@ -84,7 +86,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();
-    console.log("ng");
+
+    //set today date to check expired tasks
+    this.today = this.datePipe.transform(new Date, 'yyyy-MM-dd');
   }
 
   //select task and get id
