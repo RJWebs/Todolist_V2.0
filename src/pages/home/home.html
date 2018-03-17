@@ -74,7 +74,8 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-9>
-                      {{item.taskname}} 
+                      <ion-icon name="warning" style="color:#d9534f" *ngIf="item.enddate != '' && item.enddate < today"></ion-icon>
+                      {{item.taskname}}
                       <br> 
                       <span *ngIf="item.tasktype!=''" style="color:gray; font-size:13px">{{item.tasktype}}</span>
                       <span *ngIf="item.tasktype===''" style="color:gray; font-size:13px">Default</span>
