@@ -7,7 +7,6 @@ import { ViewtaskPage } from "../viewtask/viewtask";
 import { UpdatetaskPage } from "../updatetask/updatetask";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SettingPage } from "../setting/setting";
-// import { Content } from "ionic-angular/navigation/nav-interfaces";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 import { DatePipe } from '@angular/common';
 
@@ -18,15 +17,13 @@ import { DatePipe } from '@angular/common';
 export class HomePage implements OnInit {
 
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
-  // @ViewChild('popoverText', { read: ElementRef }) text: ElementRef;
-  // @ViewChild( 'content')content: Content;
-      // @ViewChild('content') content: ElementRef;
+  @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
+  @ViewChild( 'popoverText') text: ElementRef;
+
   todayTaskCount : number = 0;
   outDateTaskCount : number = 0;
   sortDate : any;
   sortDateLable : any = "";
-  @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
-  @ViewChild( 'popoverText') text: ElementRef;
 
   public toggled: boolean = false;
   myInput : string = "";
@@ -84,12 +81,6 @@ export class HomePage implements OnInit {
     this.getDataFromStorage();
   } 
 
-  ionViewDidAppear() {
-    console.log("ppppp");
-  }
-
-
-    
   ngOnInit() {
     //set selected list tpe to header
     this.listType = this.taskservice.getTaskType();

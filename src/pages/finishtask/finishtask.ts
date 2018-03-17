@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams, AlertController, App } from 'ionic-angular';
+import { NavController, NavParams, AlertController, App, Events } from 'ionic-angular';
 import { TabsPage } from "../tabs/tabs";
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
@@ -22,7 +22,8 @@ export class FinishtaskPage {
   fontFamily = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
-              public alertCtrl: AlertController, public setBackgroundProvider: SetbackgroundProvider, public app: App) {}
+              public alertCtrl: AlertController, public setBackgroundProvider: SetbackgroundProvider, public app: App,
+              public events: Events) {}
 
   ionViewDidEnter() {
     //get background image url from storage
@@ -127,7 +128,7 @@ export class FinishtaskPage {
               this.storage.set(this.STORAGE_KEY, this.todoList);
 
             });
-
+            this.events.publish('user:created');
             // this.navCtrl.setRoot(this.tabsPage);
  
             // this.navCtrl.popToRoot();
