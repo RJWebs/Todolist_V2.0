@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, AlertController, ModalController, PopoverController } from 'ionic-angular';
+import { NavController, AlertController, ModalController, PopoverController, Events } from 'ionic-angular';
 import { AddtaskPage } from "../addtask/addtask";
 import { TaskserviceProvider } from "../../providers/taskservice/taskservice";
 import { ViewtaskPage } from "../viewtask/viewtask";
@@ -19,6 +19,17 @@ export class HomePage implements OnInit {
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   @ViewChild('popoverImage', { read: ElementRef }) bottomImage: ElementRef;
   @ViewChild( 'popoverText') text: ElementRef;
+
+  todo: any = {
+    taskname: '',
+    description: '',
+    tasktype: '',
+    startdate: '',
+    enddate: '',
+    createdate: '',
+    taskstatus: '',
+    important: ''
+  };
 
   todayTaskCount : number = 0;
   outDateTaskCount : number = 0;
@@ -49,9 +60,12 @@ export class HomePage implements OnInit {
 
   today;
 
+  t: any[] = [];
+
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
               public alertCtrl: AlertController, public modalCtrl: ModalController,public localNotifications: LocalNotifications,
-              public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider,private datePipe: DatePipe) {
+              public popoverCtrl: PopoverController, public setBackgroundProvider: SetbackgroundProvider,private datePipe: DatePipe,
+              public events: Events) {
                 this.toggled = false;
 
               this.getDataFromStorage();
@@ -115,7 +129,6 @@ export class HomePage implements OnInit {
     else {
       this.todoList[i].important = true;
     }
-    //this.storage.set(this.STORAGE_KEY, this.todoList);
   }
 
   //view task details
@@ -201,7 +214,13 @@ export class HomePage implements OnInit {
   }
 
   //delete tasks
-  deleteTask(i) {
+  deleteTask(i, tasktype) {
+    console.log("/////////////////////////////"+tasktype);
+    let newary = [];
+    let alltodoList = [];
+    let trueindex;
+    let updatedTask;
+
     let confirm = this.alertCtrl.create({
       title: 'Do you want to delete this task?',
       message: '',
@@ -216,11 +235,45 @@ export class HomePage implements OnInit {
           text: 'Delete',
           handler: () => {
             console.log('Agree clicked');
-            this.todoList.splice(i, 1);
-            this.storage.set(this.STORAGE_KEY, this.todoList);
+
+            this.storage.get(this.STORAGE_KEY).then(result => {       
+
+                //set tasks of the selected list into new array
+                result.forEach(element => {
+                  if(this.listType === "All Lists") {
+                    newary.push({'element': element, 'index': result.indexOf(element)});
+                    console.log(newary);
+                  }
+                  else {
+                    if(element.tasktype === this.listType) {
+                      newary.push({'element': element, 'index': result.indexOf(element)});
+                      console.log(newary);
+                    }
+                  }
+                });
+                
+                //set selected index into new varialbles
+                newary.forEach(element => {
+                  if(newary.indexOf(element) === i) {
+                    trueindex = element.index;
+                  }
+                });
+
+                //get complete tasklist from storage to splice the selected task
+                this.storage.get(this.STORAGE_KEY).then(result => { 
+                  result.forEach(element => {
+                    alltodoList.push(element);
+                  });
+                  this.todoList.splice(i, 1);
+                  alltodoList.splice(trueindex, 1);
+                  this.storage.set(this.STORAGE_KEY, alltodoList);
+                });
+            });
+
             this.selectedTask = null;
             this.showId = null;
-            //this.navCtrl.popToRoot();
+            this.events.publish('task:delete', tasktype);
+            this.navCtrl.popToRoot();
           }
         }
       ]
@@ -230,11 +283,12 @@ export class HomePage implements OnInit {
 
   //navigate into updatetask page
   updateTask(i) {
-    this.navCtrl.push(this.updatetaskPage, {'task':this.todoList[i], taskindex:i});
+    this.navCtrl.push(this.updatetaskPage, {'task':this.todoList[i], 'taskindex':i, 'listType':this.listType});
+    this.showId = null;
   }
 
   //remove finished items from storage and put into another storage 
-  completeTask(i) {
+  completeTask(i, tasktype) {
     this.storage.get(this.STORAGE_KEY).then(result => {
         this.todoList = [];
         
@@ -265,6 +319,9 @@ export class HomePage implements OnInit {
       console.log("finishtask :"+ this.finishedtask);
       this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
     });
+
+    this.showId =  null;
+    this.events.publish('task:complete', tasktype);
   } 
 
   //open popover

@@ -116,10 +116,10 @@
                       <button ion-button icon-only small clear *ngIf="!item.important" color="dark" (click)="changeImportant(i)"><ion-icon name="star"></ion-icon></button>
                     </ion-col>
                     <ion-col class="iconpadding">
-                      <button ion-button icon-only small clear color="dark" (click)="completeTask(i)"><ion-icon name="checkbox-outline"></ion-icon></button>
+                      <button ion-button icon-only small clear color="dark" (click)="completeTask(i, item.tasktype)"><ion-icon name="checkbox-outline"></ion-icon></button>
                     </ion-col>
                     <ion-col class="iconpadding">
-                      <button ion-button icon-only small clear color="dark" (click)="deleteTask(i)"><ion-icon name="trash"></ion-icon></button>
+                      <button ion-button icon-only small clear color="dark" (click)="deleteTask(i, item.tasktype)"><ion-icon name="trash"></ion-icon></button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

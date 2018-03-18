@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 // import { TabsPage } from "../tabs/tabs";
@@ -10,8 +10,6 @@ import { SetbackgroundProvider } from "../../providers/setbackground/setbackgrou
   templateUrl: 'addtask.html',
 })
 export class AddtaskPage {
-
-  // tabsPage = TabsPage;
 
   todo: any = {
     taskname: '',
@@ -37,7 +35,7 @@ export class AddtaskPage {
   fontFamily = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
-              public setBackgroundProvider: SetbackgroundProvider) {
+              public setBackgroundProvider: SetbackgroundProvider, public events: Events) {
   }
 
   ionViewDidLoad() {
@@ -110,6 +108,7 @@ export class AddtaskPage {
       }
 
       // this.navCtrl.push(this.tabsPage);
+      this.events.publish('task:add', this.todo.tasktype);
       this.navCtrl.popToRoot();
     });
   }

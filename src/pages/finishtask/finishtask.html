@@ -35,7 +35,7 @@
                       <span *ngIf="item.tasktype===''" style="color:gray; font-size:13px">Default</span>
                     </ion-col>
                     <ion-col col-2>
-                      <button style="background-color:white" (click)="reAddTask(i)">
+                      <button style="background-color:white" (click)="reAddTask(i, item.tasktype)">
                         <ion-icon style="font-size:18px; color:gray" name="add-circle"></ion-icon>
                       </button>
                     </ion-col>

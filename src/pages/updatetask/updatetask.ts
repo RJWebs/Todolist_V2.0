@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { SetbackgroundProvider } from "../../providers/setbackground/setbackground";
 
 @Component({
@@ -20,6 +20,8 @@ export class UpdatetaskPage implements OnInit {
     important: ''
   };
 
+  previouseTaskType;
+
   today = new Date().toJSON();
   enddateMin = new Date().toJSON();
   endDate;
@@ -33,9 +35,10 @@ export class UpdatetaskPage implements OnInit {
   imageurl: any;
   backgroundcolor: any;
   fontFamily = '';
+  listType;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
-              public setBackgroundProvider: SetbackgroundProvider) {
+              public setBackgroundProvider: SetbackgroundProvider, public events: Events) {
     // this.todo.description = navParams.get('description');
     this.todo.taskname = navParams.data.task.taskname; 
     this.todo.description = navParams.data.task.description;
@@ -46,6 +49,8 @@ export class UpdatetaskPage implements OnInit {
     this.todo.taskstatus = navParams.data.task.taskstatus;
     this.todo.important = navParams.data.task.important;
     this.taskindex = navParams.data.taskindex;
+
+    this.listType = navParams.data.listType;
   }
 
   ngOnInit() {
@@ -57,6 +62,9 @@ export class UpdatetaskPage implements OnInit {
     else {
       this.disableEnddate = false;
     }
+
+    //get the tasktype before update the task
+    this.previouseTaskType = this.todo.tasktype;
   }
 
   ionViewDidLoad() {
@@ -106,28 +114,55 @@ export class UpdatetaskPage implements OnInit {
   
   //edit task
   editTask() {
-     return this.storage.get(this.STORAGE_KEY).then(result => {
-        result.forEach(element => {
-          if(result.indexOf(element)===this.taskindex) {            
-            element.taskname = this.todo.taskname;
-            element.description = this.todo.description;
-            element.tasktype = this.todo.tasktype;
-            element.startdate = this.todo.startdate;
-            element.enddate = this.todo.enddate;
-            element.createdate = this.todo.createdate;
-            element.taskstatus = this.todo.taskstatus;
-            element.important = this.todo.important;
+    let newary = [];
+    let trueindex;
+    let updatedTask;
 
-            this.todolist.push(element);
+     this.storage.get(this.STORAGE_KEY).then(result => {       
+
+        //set tasks of the selected list into new array
+        result.forEach(element => {
+          if(this.listType === "All Lists") {
+            newary.push({'element': element, 'index': result.indexOf(element)});
+            console.log(newary);
           }
           else {
-            this.todolist.push(element);
+            if(element.tasktype === this.listType) {
+              newary.push({'element': element, 'index': result.indexOf(element)});
+              console.log(newary);
+            }
+          }
+        });
+        
+        //set updated task detail and index into two varialbles
+        newary.forEach(element => {
+          if(newary.indexOf(element) === this.taskindex) {
+            trueindex = element.index;
+            updatedTask = this.todo;
           }
         });
 
-        this.storage.set(this.STORAGE_KEY, this.todolist);
-        this.navCtrl.popToRoot()
-    });
+        //set updated task into the actual index in storage task list
+        return this.storage.get(this.STORAGE_KEY).then(result => {   
+          result.forEach(element => {
+              if(result.indexOf(element) === trueindex) {
+                this.todolist.push(updatedTask);
+              }
+              else {
+                this.todolist.push(element);
+              }
+          });
 
+          this.storage.set(this.STORAGE_KEY, this.todolist);
+
+          if(this.todo.tasktype != this.previouseTaskType) {
+            this.events.publish('task:update', this.previouseTaskType, this.todo.tasktype);
+          }
+
+          this.navCtrl.popToRoot();
+        });
+
+     });
   }
+
 }

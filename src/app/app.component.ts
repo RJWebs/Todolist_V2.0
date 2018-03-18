@@ -40,19 +40,97 @@ export class MyApp {
       splashScreen.hide();
     });
 
-  //   events.subscribe('user:created', () => {
-  //     this.getBadgeData();
-  //   console.log('Welcome');
-  // });
+    //event of completing a task
+    events.subscribe('task:complete', (tasktype) => {
+      this.finishedtask ++;
+      this.deleteFromList(tasktype);    
+    });
+
+    //event of re-adding a completed task
+    events.subscribe('complete:readd', (tasktype) => {
+      this.finishedtask --;
+      this.addToLists(tasktype);
+    });
+
+    //event of deleteing a completed task
+    events.subscribe('complete:delete', (count) => {
+      this.finishedtask --;
+    });
+
+    //event of adding new task
+    events.subscribe('task:add', (tasktype) => {
+      this.addToLists(tasktype);
+    });
+
+
+    //event of updating an existing task
+    events.subscribe('task:update', (previouseTaskType, newTaskType) => {
+      if(newTaskType === "Personal") {
+        this.personal ++;
+      }
+      if(newTaskType === "Office") {
+        this.office ++;
+      }
+      if(newTaskType === "Wishlist") {
+        this.wishlist ++;
+      }
+      if(newTaskType === "Shopping") {
+        this.shopping ++;
+      }
+      if(previouseTaskType === "Personal") {
+        this.personal --;
+      }
+      if(previouseTaskType === "Office") {
+        this.office --;
+      }
+      if(previouseTaskType === "Wishlist") {
+        this.wishlist --;
+      }
+      if(previouseTaskType === "Shopping") {
+        this.shopping --;
+      }
+    });
+
+    //event of deleting an existing task
+    events.subscribe('task:delete', (tasktype) => { 
+      this.deleteFromList(tasktype);
+    }); 
   }
 
   ngOnInit() {
     this.getBadgeData();
   }
 
-  ionViewDidEnter() {
-    console.log("menu");
-    // this.getBadgeData();
+  addToLists(tasktype) {
+      if(tasktype === "Personal") {
+        this.personal ++;
+      }
+      if(tasktype === "Office") {
+        this.office ++;
+      }
+      if(tasktype === "Wishlist") {
+        this.wishlist ++;
+      }
+      if(tasktype === "Shopping") {
+        this.shopping ++;
+      }
+      this.allList ++;
+  }
+
+  deleteFromList(tasktype) {
+    if(tasktype === "Personal") {
+        this.personal --;
+      }
+      if(tasktype === "Office") {
+        this.office --;
+      }
+      if(tasktype === "Wishlist") {
+        this.wishlist --;
+      }
+      if(tasktype === "Shopping") {
+        this.shopping --;
+      }
+      this.allList --;
   }
 
   //get data to display on menu badges

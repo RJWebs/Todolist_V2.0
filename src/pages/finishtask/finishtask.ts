@@ -75,6 +75,7 @@ export class FinishtaskPage {
             console.log('Agree clicked');
             this.finishedtaskList.splice(i, 1);
             this.storage.set(this.FINISHED_KEY, this.finishedtaskList);
+            this.events.publish('complete:delete', 1);
           }
         }
       ]
@@ -83,7 +84,7 @@ export class FinishtaskPage {
   }
 
   //re-add task to storage 
-  reAddTask(i) {
+  reAddTask(i, tasktype) {
     let confirm = this.alertCtrl.create({
       title: 'Do you want to re add this task?',
       message: '',
@@ -128,7 +129,7 @@ export class FinishtaskPage {
               this.storage.set(this.STORAGE_KEY, this.todoList);
 
             });
-            // this.events.publish('user:created');
+            this.events.publish('complete:readd', tasktype);
             // this.navCtrl.setRoot(this.tabsPage);
  
             // this.navCtrl.popToRoot();
