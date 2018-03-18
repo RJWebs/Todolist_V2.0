@@ -372,9 +372,9 @@ export class HomePage implements OnInit {
                               });
 
         this.localNotifications.schedule({
-                    id: 1,
+                    id: 2,
                     title: 'Attention',
-                    text: 'You have ' + this.outDateTaskCount + "tasks to do!",
+                    text: 'You have ' + this.outDateTaskCount + "outdated tasks!",
                     data: { mydata: 'My hidden message this is' },
                     at: new Date(new Date().getTime() + 4 * 1000)
                               }); 
