@@ -72,10 +72,16 @@ export class HomePage implements OnInit {
 
               this.showNotification();
               
+              //event of changing list type to All Lists, after re-adding completed tasks
+              events.subscribe('listType:change', () => {
+                this.listType = "All Lists";   
+              });
   }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad HomePage');
+
+    this.showId = null;
 
     //get background image url from storage
     this.setBackgroundProvider.getBackground().then((val)=>{
@@ -215,11 +221,10 @@ export class HomePage implements OnInit {
 
   //delete tasks
   deleteTask(i, tasktype) {
-    console.log("/////////////////////////////"+tasktype);
     let newary = [];
     let alltodoList = [];
     let trueindex;
-    let updatedTask;
+    // let updatedTask;
 
     let confirm = this.alertCtrl.create({
       title: 'Do you want to delete this task?',

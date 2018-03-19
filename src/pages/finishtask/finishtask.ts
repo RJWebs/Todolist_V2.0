@@ -130,6 +130,7 @@ export class FinishtaskPage {
 
             });
             this.events.publish('complete:readd', tasktype);
+            this.events.publish('listType:change');
             // this.navCtrl.setRoot(this.tabsPage);
  
             // this.navCtrl.popToRoot();
