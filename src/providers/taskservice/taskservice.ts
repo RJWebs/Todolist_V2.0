@@ -14,7 +14,7 @@ export class TaskserviceProvider {
   finishedtask;
   FINISHED_KEY = 'completed_item';
   STORAGE_KEY = 'todo_item';
-  
+  notification : any;
   constructor(public storage :Storage,private datePipe: DatePipe) {}
 
   setTaskType(taskType : any)
@@ -93,5 +93,10 @@ export class TaskserviceProvider {
 
     return this.sortDateLable;
     
+  }
+  disableNotification()
+  {
+    this.notification = false;
+    return this.notification;
   }
 }

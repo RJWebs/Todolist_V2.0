@@ -59,7 +59,7 @@ export class HomePage implements OnInit {
   fontFamily;
 
   today;
-
+  notification : any = true;
   t: any[] = [];
 
   constructor(public navCtrl: NavController, public taskservice: TaskserviceProvider, public storage: Storage,
@@ -69,8 +69,11 @@ export class HomePage implements OnInit {
                 this.toggled = false;
 
               this.getDataFromStorage();
-
+              
+              if(this.notification)
+              {
               this.showNotification();
+              }
               
               //event of changing list type to All Lists, after re-adding completed tasks
               events.subscribe('listType:change', () => {
@@ -382,7 +385,9 @@ export class HomePage implements OnInit {
                     text: 'You have ' + this.outDateTaskCount + "outdated tasks!",
                     data: { mydata: 'My hidden message this is' },
                     at: new Date(new Date().getTime() + 4 * 1000)
-                              }); 
+                              });
+
+                this.notification = this.taskservice.disableNotification(); 
                 }
  
       });
